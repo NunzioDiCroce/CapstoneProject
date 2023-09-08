@@ -3,7 +3,6 @@ package com.example.FastOutBackEnd.entities;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import com.example.FastOutBackEnd.enums.CustomerType;
 import com.example.FastOutBackEnd.enums.ResourceStatus;
 import com.example.FastOutBackEnd.enums.ResourceType;
 
