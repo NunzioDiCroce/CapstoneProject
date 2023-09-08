@@ -43,5 +43,12 @@ public class Equipment {
 	
 	@ManyToOne
 	private Platform platform;
+	
+	public Equipment(EquipmentType equipmentType, BigDecimal equipmentCost, String serialNumber, EquipmentStatus equipmentStatus) {
+		this.equipmentType = equipmentType;
+		this.equipmentCost = equipmentCost;
+		this.serialNumber = serialNumber;
+		this.equipmentStatus = equipmentStatus;
+	}
 
 }
