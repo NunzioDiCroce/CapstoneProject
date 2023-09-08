@@ -1,0 +1,5 @@
+package com.example.FastOutBackEnd.exceptions;
+
+public class NotFoundException extends RuntimeException{
+
+}

@@ -1,0 +1,6 @@
+package com.example.FastOutBackEnd.services;
+
+@Service
+public class PlatformService {
+
+}

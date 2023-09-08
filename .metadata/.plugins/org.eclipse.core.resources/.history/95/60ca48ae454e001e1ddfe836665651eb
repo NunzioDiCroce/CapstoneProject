@@ -1,0 +1,22 @@
+package com.example.FastOutBackEnd.payloads;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
+
+import com.example.FastOutBackEnd.entities.Equipment;
+import com.example.FastOutBackEnd.entities.Resource;
+import com.example.FastOutBackEnd.enums.CustomerType;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class UpdatePlatformPayload {
+
+}

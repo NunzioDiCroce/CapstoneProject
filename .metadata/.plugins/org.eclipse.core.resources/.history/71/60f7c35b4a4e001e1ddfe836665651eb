@@ -1,0 +1,5 @@
+package com.example.FastOutBackEnd.services;
+
+public class EquipmentService {
+
+}
