@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.example.FastOutBackEnd.enums.CustomerType;
+import com.example.FastOutBackEnd.enums.ResourceStatus;
+import com.example.FastOutBackEnd.enums.ResourceType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,29 +20,25 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="platforms")
+@Table(name="resources")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Platform {
+public class Resource {
 	
 	@Id
 	@GeneratedValue
 	private UUID id;
 	
-	private String location;
-	
 	@Enumerated(EnumType.STRING)
-	private CustomerType customerType;
+	private ResourceType resourceType;
 	
-	private BigDecimal marginPerMonth;
-	private BigDecimal productivity;
-	private BigDecimal revenuesPerMonth;
-	private BigDecimal parcelsPerMonth;
-	private BigDecimal parcelRate;
-	private BigDecimal totalCostsPerMonth;
+	private BigDecimal resourceCost;
 	private BigDecimal hoursPerMonth;
 	
+	@Enumerated(EnumType.STRING)
+	private ResourceStatus resourceStatus;
+
 }
