@@ -59,7 +59,7 @@ public class PlatformService {
 	
 	}
 	
-	// delete by id platform
+	// delete by id Platform
 	public void deletePlatform(UUID id) {
 		Platform found = getPlatformByID(id);
 		platformRepository.delete(found);
