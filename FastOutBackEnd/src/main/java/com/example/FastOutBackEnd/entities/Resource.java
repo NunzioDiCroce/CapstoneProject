@@ -43,5 +43,12 @@ public class Resource {
 	
 	@ManyToOne
 	private Platform platform;
+	
+	public Resource(ResourceType resourceType, BigDecimal resourceCost, BigDecimal hoursPerMonth, ResourceStatus resourceStatus) {
+		this.resourceType = resourceType;
+		this.resourceCost = resourceCost;
+		this.hoursPerMonth = hoursPerMonth;
+		this.resourceStatus = resourceStatus;
+	}
 
 }
