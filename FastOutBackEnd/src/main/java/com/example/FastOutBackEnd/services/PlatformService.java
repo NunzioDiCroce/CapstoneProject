@@ -1,6 +1,8 @@
 package com.example.FastOutBackEnd.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.FastOutBackEnd.entities.Platform;
+import com.example.FastOutBackEnd.exceptions.NotFoundException;
+import com.example.FastOutBackEnd.payloads.UpdatePlatformPayload;
 import com.example.FastOutBackEnd.repositories.PlatformRepository;
 
 @Service
@@ -31,13 +35,34 @@ public class PlatformService {
 	// find all Platforms pagination
 	public Page<Platform> find(int page, int size, String sort) {
 		Pageable pag = PageRequest.of(page, size, Sort.by(sort));
+		
 		return platformRepository.findAll(pag);
 	}
 	
 	// get by id Platform
-	public Platform getPLatformByID(UUID id) {
+	public Platform getPlatformByID(UUID id) {
 		Optional<Platform> found = platformRepository.findById(id);
-		return found.orElseThrow(() -> new NotFoundException("Cliente non trovato con ID " + id));
+		
+		return found.orElseThrow(() -> new NotFoundException("Platform with " + id + "not found."));
+	}
+	
+	// update by id Platform
+	public Platform updatePlatform(UUID id, UpdatePlatformPayload body) {
+		Platform found = getPlatformByID(id);
+		
+		found.setLocation(body.getLocation());
+		found.setCustomerType(body.getCustomerType());
+		found.setParcelsPerMonth(body.getParcelsPerMonth());
+		found.setParcelRate(body.getParcelRate());
+
+		return platformRepository.save(found);
+	
+	}
+	
+	// delete by id platform
+	public void deletePlatform(UUID id) {
+		Platform found = getPlatformByID(id);
+		platformRepository.delete(found);
 	}
 
 }

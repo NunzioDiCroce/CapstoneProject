@@ -32,16 +32,16 @@ public class Platform {
 	@GeneratedValue
 	private UUID id;
 	
-	private String location;
+	private String location; // input field
 	
 	@Enumerated(EnumType.STRING)
-	private CustomerType customerType;
+	private CustomerType customerType; // input field
 	
 	private BigDecimal marginPerMonth;
 	private BigDecimal productivity;
 	private BigDecimal revenuesPerMonth;
-	private BigDecimal parcelsPerMonth;
-	private BigDecimal parcelRate;
+	private BigDecimal parcelsPerMonth; // input field
+	private BigDecimal parcelRate; // input field
 	private BigDecimal totalCostsPerMonth;
 	private BigDecimal hoursPerMonth;
 	
