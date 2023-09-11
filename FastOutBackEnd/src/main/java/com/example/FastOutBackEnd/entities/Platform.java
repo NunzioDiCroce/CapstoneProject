@@ -82,4 +82,27 @@ public class Platform {
 	    }
 	}
 	
+	// * * * * * * * * * * Platform totalCostsPerMonth updating
+	public void updateTotalCostsPerMonth() {
+		BigDecimal totalCosts = BigDecimal.ZERO;
+		
+		if (resources != null) {
+			for (Resource resource : resources) {
+				if (resource.getResourceCost() != null) {
+					totalCosts = totalCosts.add(resource.getResourceCost());
+				}
+			}
+		}
+		
+		if (equipments != null) {
+			for (Equipment equipment : equipments) {
+				if(equipment.getEquipmentCost() != null) {
+					totalCosts = totalCosts.add(equipment.getEquipmentCost());
+				}
+			}
+		}
+		
+		this.totalCostsPerMonth = totalCosts;
+	}
+	
 }

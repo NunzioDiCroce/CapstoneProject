@@ -97,6 +97,9 @@ public class ResourceService {
         // updateProductivity
         platform.updateProductivity();
         
+        // updateTotalCostsPerMonth
+        platform.updateTotalCostsPerMonth();
+        
         platformService.savePlatform(platform);
 
 		return resourceRepository.save(resource);
@@ -129,6 +132,9 @@ public class ResourceService {
 		
 		// updateProductivity
         platform.updateProductivity();
+        
+        // updateTotalCostsPerMonth
+        platform.updateTotalCostsPerMonth();
 		
 		return resourceRepository.save(resource);
 	}
