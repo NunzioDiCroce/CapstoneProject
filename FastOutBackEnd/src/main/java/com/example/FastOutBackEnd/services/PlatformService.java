@@ -99,6 +99,7 @@ public class PlatformService {
 	
 	}
 	
+	
 	// delete by id Platform
 	public void deletePlatform(UUID id) {
 		Platform found = getPlatformByID(id);

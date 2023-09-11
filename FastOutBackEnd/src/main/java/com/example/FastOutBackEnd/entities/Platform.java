@@ -56,4 +56,22 @@ public class Platform {
 	@JsonIgnore // To avoid reference loops during serialization in 'assign Equipment'
 	private List<Equipment> equipments;
 	
+	
+	// * * * * * * * * * * Platform hoursPerMonth updating
+	public void updatePlatformHoursPerMonth() {
+		
+		if (resources != null) {
+			BigDecimal totalHours = BigDecimal.ZERO;
+			for (Resource resource : resources) {
+				if (resource.getHoursPerMonth() != null) {
+					totalHours = totalHours.add(resource.getHoursPerMonth());
+				}
+			}
+			this.hoursPerMonth = totalHours;
+			
+		} else {
+			this.hoursPerMonth = BigDecimal.ZERO;
+		}
+	}
+	
 }

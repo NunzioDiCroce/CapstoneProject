@@ -87,9 +87,13 @@ public class ResourceService {
 		Platform platform = platformService.getPlatformByID(body.getPlatformId());
 		resource.setPlatform(platform);
 		resource.setResourceStatus(ResourceStatus.ASSIGNED);
+		
+		// updatePlatformHoursPerMonth
+		platform.getResources().add(resource);
+        platform.updatePlatformHoursPerMonth();
+        platformService.savePlatform(platform);
 
 		return resourceRepository.save(resource);
-
 	}
 	
 	// * * * * * * * * * * remove Resource
@@ -105,11 +109,18 @@ public class ResourceService {
 			throw new IllegalStateException("The resource is not assigned to any platform.");
 		}
 
+		Platform platform = resource.getPlatform();
+		platform.getResources().remove(resource);
 		resource.setPlatform(null);
 		resource.setResourceStatus(ResourceStatus.AVAILABLE);
-
+		
+		// updatePlatformHoursPerMonth
+		if (platform != null) {
+	        platform.updatePlatformHoursPerMonth();
+	        platformService.savePlatform(platform);
+	    }
+		
 		return resourceRepository.save(resource);
-
 	}
 
 }
