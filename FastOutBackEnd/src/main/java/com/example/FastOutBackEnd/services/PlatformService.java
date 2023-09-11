@@ -1,5 +1,6 @@
 package com.example.FastOutBackEnd.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,9 +24,19 @@ public class PlatformService {
 	private PlatformRepository platformRepository;
 	
 	// save Platform
+//	public Platform savePlatform(Platform platform) {
+//		return platformRepository.save(platform);
+//	}
+	
 	public Platform savePlatform(Platform platform) {
-		return platformRepository.save(platform);
-	}
+		
+		BigDecimal parcelsPerMonth = platform.getParcelsPerMonth();
+		BigDecimal parcelRate = platform.getParcelRate();
+		BigDecimal revenuesPerMonth = parcelsPerMonth.multiply(parcelRate);
+		platform.setRevenuesPerMonth(revenuesPerMonth);
+		
+	return platformRepository.save(platform);
+}
 	
 	// find all Platforms
 	public List<Platform> getAllPlatforms() {
