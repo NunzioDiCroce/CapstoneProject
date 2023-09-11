@@ -87,6 +87,13 @@ public class EquipmentService {
 		Platform platform = platformService.getPlatformByID(body.getPlatformId());
 		equipment.setPlatform(platform);
 		equipment.setEquipmentStatus(EquipmentStatus.ASSIGNED);
+		
+		platform.getEquipments().add(equipment);
+		
+		// updateTotalCostsPerMonth
+        platform.updateTotalCostsPerMonth();
+        
+        platformService.savePlatform(platform);
 
 		return equipmentRepository.save(equipment);
 
@@ -105,8 +112,13 @@ public class EquipmentService {
 			throw new IllegalStateException("The equipment is not assigned to any platform.");
 		}
 
+		Platform platform = equipment.getPlatform();
+		platform.getEquipments().remove(equipment);
 		equipment.setPlatform(null);
 		equipment.setEquipmentStatus(EquipmentStatus.AVAILABLE);
+		
+		// updateTotalCostsPerMonth
+        platform.updateTotalCostsPerMonth();
 
 		return equipmentRepository.save(equipment);
 
