@@ -27,12 +27,12 @@ public class PlatformController {
 	@Autowired
 	private PlatformService platformService;
 	
-	// save Platform
+	// create Platform
 	@PostMapping
 	//@PreAuthorize("hasAuthority('AMMINISTRATORE')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Platform createPlatform(@RequestBody Platform platform) {
-		return platformService.savePlatform(platform);
+		return platformService.createPlatformSrv(platform);
 	}
 	
 	

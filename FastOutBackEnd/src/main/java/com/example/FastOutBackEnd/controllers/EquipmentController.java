@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.FastOutBackEnd.entities.Equipment;
+import com.example.FastOutBackEnd.payloads.AssignEquipmentPayload;
+import com.example.FastOutBackEnd.payloads.RemoveEquipmentPayload;
 import com.example.FastOutBackEnd.payloads.UpdateEquipmentPayload;
 import com.example.FastOutBackEnd.services.EquipmentService;
 
@@ -69,6 +71,18 @@ public class EquipmentController {
 	//@PreAuthorize("hasAuthority('AMMINISTRATORE')")
 	public void deleteEquipment(@PathVariable UUID id) {
 		equipmentService.deleteEquipment(id);
+	}
+	
+	// * * * * * * * * * * assign Equipment
+	@PutMapping("/{equipmentId}/assign")
+	public Equipment assignEquipment(@PathVariable UUID equipmentId, @RequestBody AssignEquipmentPayload body) {
+		return equipmentService.assignEquipmentSrv(equipmentId, body);
+	}
+	
+	// * * * * * * * * * * remove Equipment
+	@PutMapping("/{equipmentId}/remove")
+	public Equipment removeEquipment(@PathVariable UUID equipmentId, @RequestBody RemoveEquipmentPayload body) {
+		return equipmentService.removeEquipmentSrv(equipmentId, body);
 	}
 
 }
