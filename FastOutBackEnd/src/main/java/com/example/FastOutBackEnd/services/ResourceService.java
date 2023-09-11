@@ -11,8 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.FastOutBackEnd.entities.Platform;
 import com.example.FastOutBackEnd.entities.Resource;
+import com.example.FastOutBackEnd.enums.ResourceStatus;
 import com.example.FastOutBackEnd.exceptions.NotFoundException;
+import com.example.FastOutBackEnd.payloads.AssignResourcePayload;
+import com.example.FastOutBackEnd.payloads.RemoveResourcePayload;
 import com.example.FastOutBackEnd.payloads.UpdateResourcePayload;
 import com.example.FastOutBackEnd.repositories.ResourceRepository;
 
@@ -21,6 +25,9 @@ public class ResourceService {
 	
 	@Autowired
 	private ResourceRepository resourceRepository;
+	
+	@Autowired
+	private PlatformService platformService;
 	
 	// save Resource
 	public Resource saveResource(Resource resource) {
@@ -62,6 +69,47 @@ public class ResourceService {
 	public void deleteResource(UUID id) {
 		Resource found = getResourceByID(id);
 		resourceRepository.delete(found);
+	}
+	
+	// * * * * * * * * * * assign Resource
+	public Resource assignResourceSrv(UUID resourceId, AssignResourcePayload body)
+			throws NotFoundException, IllegalStateException {
+		Resource resource = this.getResourceByID(resourceId);
+
+		if (resource.getPlatform() != null) {
+			throw new IllegalStateException("The resource is already assigned to a platform.");
+		}
+
+		if (resource.getResourceStatus() != ResourceStatus.AVAILABLE) {
+			throw new IllegalStateException("The resource is not available for assignment.");
+		}
+
+		Platform platform = platformService.getPlatformByID(body.getPlatformId());
+		resource.setPlatform(platform);
+		resource.setResourceStatus(ResourceStatus.ASSIGNED);
+
+		return resourceRepository.save(resource);
+
+	}
+	
+	// * * * * * * * * * * remove Resource
+	public Resource removeResourceSrv(UUID resourceId, RemoveResourcePayload body)
+			throws NotFoundException, IllegalStateException {
+		Resource resource = this.getResourceByID(resourceId);
+
+		if (resource.getPlatform() == null) {
+			throw new IllegalStateException("The resource is not assigned to any platform.");
+		}
+
+		if (resource.getResourceStatus() != ResourceStatus.ASSIGNED) {
+			throw new IllegalStateException("The resource is not assigned to any platform.");
+		}
+
+		resource.setPlatform(null);
+		resource.setResourceStatus(ResourceStatus.AVAILABLE);
+
+		return resourceRepository.save(resource);
+
 	}
 
 }

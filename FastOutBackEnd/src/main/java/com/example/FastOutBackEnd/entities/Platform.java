@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.example.FastOutBackEnd.enums.CustomerType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -46,6 +47,7 @@ public class Platform {
 	private BigDecimal hoursPerMonth;
 	
 	@OneToMany(mappedBy = "platform")
+	@JsonIgnore // To avoid reference loops during serialization in 'assign Resource'
 	private List<Resource> resources;
 	
 	@OneToMany(mappedBy = "platform")
