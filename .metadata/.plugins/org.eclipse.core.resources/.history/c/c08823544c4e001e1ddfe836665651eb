@@ -1,0 +1,5 @@
+package com.example.FastOutBackEnd.controllers;
+
+public class PlatformController {
+
+}

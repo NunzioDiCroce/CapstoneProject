@@ -1,0 +1,68 @@
+package com.example.FastOutBackEnd.services;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import com.example.FastOutBackEnd.entities.Platform;
+import com.example.FastOutBackEnd.exceptions.NotFoundException;
+import com.example.FastOutBackEnd.payloads.UpdatePlatformPayload;
+import com.example.FastOutBackEnd.repositories.PlatformRepository;
+
+@Service
+public class ResourceService {
+	
+	@Autowired
+	private ResourceRepository resourceRepository;
+	
+	// save Resource
+	public Resource savePlatform(Resource platform) {
+		return resourceRepository.save(platform);
+	}
+	
+	// find all Resources
+	public List<Resource> getAllPlatforms() {
+		return resourceRepository.findAll();
+	}
+	
+	// find all Resources pagination
+	public Page<Resource> find(int page, int size, String sort) {
+		Pageable pag = PageRequest.of(page, size, Sort.by(sort));
+		
+		return resourceRepository.findAll(pag);
+	}
+	
+	// get by id Resource
+	public Resource getResourceByID(UUID id) {
+		Optional<Resource> found = resourceRepository.findById(id);
+		
+		return found.orElseThrow(() -> new NotFoundException("Resource with " + id + "not found."));
+	}
+	
+	// update by id Resource
+	public Resource updateResource(UUID id, UpdateResourcePayload body) {
+		Resource found = getResourceByID(id);
+		
+		found.setLocation(body.getLocation());
+		found.setCustomerType(body.getCustomerType());
+		found.setParcelsPerMonth(body.getParcelsPerMonth());
+		found.setParcelRate(body.getParcelRate());
+
+		return resourceRepository.save(found);
+	
+	}
+	
+	// delete by id Resource
+	public void deleteResource(UUID id) {
+		Resource found = getResourceByID(id);
+		resourceRepository.delete(found);
+	}
+
+}

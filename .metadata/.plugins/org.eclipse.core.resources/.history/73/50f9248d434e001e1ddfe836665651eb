@@ -1,0 +1,23 @@
+package com.example.FastOutBackEnd.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.FastOutBackEnd.entities.Platform;
+import com.example.FastOutBackEnd.repositories.PlatformRepository;
+
+@Service
+public class PlatformService {
+	
+	@Autowired
+	private PlatformRepository platformRepository;
+	
+	// save Platform
+	public Platform savePlatform(Platform platform) {
+		return platformRepository.save(platform);
+	}
+	
+	// get all Platforms
+	
+
+}
