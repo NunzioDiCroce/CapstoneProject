@@ -1,0 +1,8 @@
+package com.example.FastOutBackEnd.payloads;
+
+@Getter
+@Setter
+@AllArgsConstructor
+public class AssignResourcePayload {
+
+}

@@ -1,0 +1,9 @@
+package com.example.FastOutBackEnd.payloads;
+
+import com.example.FastOutBackEnd.enums.ResourceStatus;
+
+public class RemoveEquipmentPayload {
+	
+	private EquipmentStatus equipmentStatus;
+
+}

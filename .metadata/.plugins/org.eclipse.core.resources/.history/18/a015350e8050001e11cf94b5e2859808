@@ -1,0 +1,7 @@
+package com.example.FastOutBackEnd.payloads;
+
+@Getter
+@Setter
+public class RemoveResourcePayload {
+
+}

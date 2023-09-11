@@ -1,0 +1,134 @@
+package com.example.FastOutBackEnd.services;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import com.example.FastOutBackEnd.entities.Platform;
+import com.example.FastOutBackEnd.entities.Resource;
+import com.example.FastOutBackEnd.enums.ResourceStatus;
+import com.example.FastOutBackEnd.exceptions.NotFoundException;
+import com.example.FastOutBackEnd.payloads.AssignResourcePayload;
+import com.example.FastOutBackEnd.payloads.RemoveResourcePayload;
+import com.example.FastOutBackEnd.payloads.UpdateResourcePayload;
+import com.example.FastOutBackEnd.repositories.ResourceRepository;
+
+@Service
+public class ResourceService {
+	
+	@Autowired
+	private ResourceRepository resourceRepository;
+	
+	@Autowired
+	private PlatformService platformService;
+	
+	// save Resource
+	public Resource saveResource(Resource resource) {
+		return resourceRepository.save(resource);
+	}
+	
+	// find all Resources
+	public List<Resource> getAllResources() {
+		return resourceRepository.findAll();
+	}
+	
+	// find all Resources pagination
+	public Page<Resource> find(int page, int size, String sort) {
+		Pageable pag = PageRequest.of(page, size, Sort.by(sort));
+		
+		return resourceRepository.findAll(pag);
+	}
+	
+	// get by id Resource
+	public Resource getResourceByID(UUID id) {
+		Optional<Resource> found = resourceRepository.findById(id);
+		
+		return found.orElseThrow(() -> new NotFoundException("Resource with " + id + "not found."));
+	}
+	
+	// update by id Resource
+	public Resource updateResource(UUID id, UpdateResourcePayload body) {
+		Resource found = getResourceByID(id);
+			
+		found.setResourceType(body.getResourceType());
+		found.setResourceCost(body.getResourceCost());
+		found.setResourceStatus(body.getResourceStatus());
+
+		return resourceRepository.save(found);
+	
+	}
+	
+	// delete by id Resource
+	public void deleteResource(UUID id) {
+		Resource found = getResourceByID(id);
+		resourceRepository.delete(found);
+	}
+	
+	// * * * * * * * * * * assign Resource
+	public Resource assignResourceSrv(UUID resourceId, AssignResourcePayload body)
+			throws NotFoundException, IllegalStateException {
+		Resource resource = this.getResourceByID(resourceId);
+
+		if (resource.getPlatform() != null) {
+			throw new IllegalStateException("The resource is already assigned to a platform.");
+		}
+
+		if (resource.getResourceStatus() != ResourceStatus.AVAILABLE) {
+			throw new IllegalStateException("The resource is not available for assignment.");
+		}
+
+		Platform platform = platformService.getPlatformByID(body.getPlatformId());
+		resource.setPlatform(platform);
+		resource.setResourceStatus(ResourceStatus.ASSIGNED);
+		
+		
+		platform.updatePlatformHoursPerMonth();
+        platformService.savePlatform(platform);
+		
+		// updatePlatformHoursPerMonth
+        Platform resourcePlatform = resource.getPlatform();
+        if (resourcePlatform != null) {
+            resourcePlatform.updatePlatformHoursPerMonth();
+            platformService.savePlatform(resourcePlatform);
+        }
+
+		
+		return resourceRepository.save(resource);
+	}
+	
+	// * * * * * * * * * * remove Resource
+	public Resource removeResourceSrv(UUID resourceId, RemoveResourcePayload body)
+			throws NotFoundException, IllegalStateException {
+		Resource resource = this.getResourceByID(resourceId);
+
+		if (resource.getPlatform() == null) {
+			throw new IllegalStateException("The resource is not assigned to any platform.");
+		}
+
+		if (resource.getResourceStatus() != ResourceStatus.ASSIGNED) {
+			throw new IllegalStateException("The resource is not assigned to any platform.");
+		}
+
+		resource.setPlatform(null);
+		resource.setResourceStatus(ResourceStatus.AVAILABLE);
+		
+		
+		// updatePlatformHoursPerMonth
+        Platform resourcePlatform = resource.getPlatform();
+        if (resourcePlatform != null) {
+            resourcePlatform.updatePlatformHoursPerMonth();
+            platformService.savePlatform(resourcePlatform);
+        }
+
+		
+		return resourceRepository.save(resource);
+	}
+
+}
