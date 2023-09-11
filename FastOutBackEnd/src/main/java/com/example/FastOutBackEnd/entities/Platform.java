@@ -1,6 +1,7 @@
 package com.example.FastOutBackEnd.entities;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,8 +59,7 @@ public class Platform {
 	
 	
 	// * * * * * * * * * * Platform hoursPerMonth updating
-	public void updatePlatformHoursPerMonth() {
-		
+	public void updatePlatformHoursPerMonth() {		
 		if (resources != null) {
 			BigDecimal totalHours = BigDecimal.ZERO;
 			for (Resource resource : resources) {
@@ -68,10 +68,18 @@ public class Platform {
 				}
 			}
 			this.hoursPerMonth = totalHours;
-			
 		} else {
 			this.hoursPerMonth = BigDecimal.ZERO;
 		}
+	}
+	
+	// * * * * * * * * * * Platform productivity updating
+	public void updateProductivity() {
+	    if (hoursPerMonth != null && hoursPerMonth.compareTo(BigDecimal.ZERO) > 0) {
+	        productivity = parcelsPerMonth.divide(hoursPerMonth, 2, RoundingMode.HALF_UP);
+	    } else {
+	        productivity = BigDecimal.ZERO;
+	    }
 	}
 	
 }

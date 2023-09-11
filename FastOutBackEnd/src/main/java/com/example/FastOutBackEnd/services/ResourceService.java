@@ -71,6 +71,7 @@ public class ResourceService {
 		resourceRepository.delete(found);
 	}
 	
+	
 	// * * * * * * * * * * assign Resource
 	public Resource assignResourceSrv(UUID resourceId, AssignResourcePayload body)
 			throws NotFoundException, IllegalStateException {
@@ -88,13 +89,19 @@ public class ResourceService {
 		resource.setPlatform(platform);
 		resource.setResourceStatus(ResourceStatus.ASSIGNED);
 		
-		// updatePlatformHoursPerMonth
 		platform.getResources().add(resource);
+		
+		// updatePlatformHoursPerMonth
         platform.updatePlatformHoursPerMonth();
+        
+        // updateProductivity
+        platform.updateProductivity();
+        
         platformService.savePlatform(platform);
 
 		return resourceRepository.save(resource);
 	}
+	
 	
 	// * * * * * * * * * * remove Resource
 	public Resource removeResourceSrv(UUID resourceId, RemoveResourcePayload body)
@@ -119,6 +126,9 @@ public class ResourceService {
 	        platform.updatePlatformHoursPerMonth();
 	        platformService.savePlatform(platform);
 	    }
+		
+		// updateProductivity
+        platform.updateProductivity();
 		
 		return resourceRepository.save(resource);
 	}
