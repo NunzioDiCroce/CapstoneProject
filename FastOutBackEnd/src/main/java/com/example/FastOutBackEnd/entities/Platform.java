@@ -38,13 +38,15 @@ public class Platform {
 	@Enumerated(EnumType.STRING)
 	private CustomerType customerType; // input field
 	
-	private BigDecimal marginPerMonth;
-	private BigDecimal productivity;
-	private BigDecimal revenuesPerMonth;
 	private BigDecimal parcelsPerMonth; // input field
 	private BigDecimal parcelRate; // input field
+	private BigDecimal revenuesPerMonth;
+	
 	private BigDecimal totalCostsPerMonth;
 	private BigDecimal hoursPerMonth;
+	
+	private BigDecimal marginPerMonth;
+	private BigDecimal productivity;
 	
 	@OneToMany(mappedBy = "platform")
 	@JsonIgnore // To avoid reference loops during serialization in 'assign Resource'

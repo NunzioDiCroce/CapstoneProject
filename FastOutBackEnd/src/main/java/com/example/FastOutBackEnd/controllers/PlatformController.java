@@ -32,7 +32,7 @@ public class PlatformController {
 	//@PreAuthorize("hasAuthority('AMMINISTRATORE')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Platform createPlatform(@RequestBody Platform platform) {
-		return platformService.savePlatform(platform);
+		return platformService.createPlatformSrv(platform);
 	}
 	
 	
