@@ -51,6 +51,7 @@ public class Platform {
 	private List<Resource> resources;
 	
 	@OneToMany(mappedBy = "platform")
+	@JsonIgnore // To avoid reference loops during serialization in 'assign Equipment'
 	private List<Equipment> equipments;
 	
 }

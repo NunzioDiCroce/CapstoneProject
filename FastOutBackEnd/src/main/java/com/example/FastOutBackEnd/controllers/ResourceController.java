@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.FastOutBackEnd.entities.Platform;
 import com.example.FastOutBackEnd.entities.Resource;
-import com.example.FastOutBackEnd.enums.ResourceStatus;
-import com.example.FastOutBackEnd.exceptions.NotFoundException;
 import com.example.FastOutBackEnd.payloads.AssignResourcePayload;
 import com.example.FastOutBackEnd.payloads.RemoveResourcePayload;
 import com.example.FastOutBackEnd.payloads.UpdateResourcePayload;
@@ -84,7 +81,7 @@ public class ResourceController {
 	
 	// * * * * * * * * * * remove Resource
 	@PutMapping("/{resourceId}/remove")
-	public Resource removeDevice(@PathVariable UUID resourceId, @RequestBody RemoveResourcePayload body) {
+	public Resource removeResource(@PathVariable UUID resourceId, @RequestBody RemoveResourcePayload body) {
 		return resourceService.removeResourceSrv(resourceId, body);
 	}
 

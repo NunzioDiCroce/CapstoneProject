@@ -10,9 +10,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import com.example.FastOutBackEnd.entities.Equipment;
+import com.example.FastOutBackEnd.entities.Platform;
+import com.example.FastOutBackEnd.enums.EquipmentStatus;
 import com.example.FastOutBackEnd.exceptions.NotFoundException;
+import com.example.FastOutBackEnd.payloads.AssignEquipmentPayload;
+import com.example.FastOutBackEnd.payloads.RemoveEquipmentPayload;
 import com.example.FastOutBackEnd.payloads.UpdateEquipmentPayload;
 import com.example.FastOutBackEnd.repositories.EquipmentRepository;
 
@@ -21,6 +24,9 @@ public class EquipmentService {
 	
 	@Autowired
 	private EquipmentRepository equipmentRepository;
+	
+	@Autowired
+	private PlatformService platformService;
 	
 	// save Equipment
 	public Equipment saveEquipment(Equipment equipment) {
@@ -63,6 +69,47 @@ public class EquipmentService {
 	public void deleteEquipment(UUID id) {
 		Equipment found = getEquipmentByID(id);
 		equipmentRepository.delete(found);
+	}
+	
+	// * * * * * * * * * * assign Equipment
+	public Equipment assignEquipmentSrv(UUID equipmentId, AssignEquipmentPayload body)
+			throws NotFoundException, IllegalStateException {
+		Equipment equipment = this.getEquipmentByID(equipmentId);
+
+		if (equipment.getPlatform() != null) {
+			throw new IllegalStateException("The equipment is already assigned to a platform.");
+		}
+
+		if (equipment.getEquipmentStatus() != EquipmentStatus.AVAILABLE) {
+			throw new IllegalStateException("The equipment is not available for assignment.");
+		}
+
+		Platform platform = platformService.getPlatformByID(body.getPlatformId());
+		equipment.setPlatform(platform);
+		equipment.setEquipmentStatus(EquipmentStatus.ASSIGNED);
+
+		return equipmentRepository.save(equipment);
+
+	}
+	
+	// * * * * * * * * * * remove Equipment
+	public Equipment removeEquipmentSrv(UUID equipmentId, RemoveEquipmentPayload body)
+			throws NotFoundException, IllegalStateException {
+		Equipment equipment = this.getEquipmentByID(equipmentId);
+
+		if (equipment.getPlatform() == null) {
+			throw new IllegalStateException("The equipment is not assigned to any platform.");
+		}
+
+		if (equipment.getEquipmentStatus() != EquipmentStatus.ASSIGNED) {
+			throw new IllegalStateException("The equipment is not assigned to any platform.");
+		}
+
+		equipment.setPlatform(null);
+		equipment.setEquipmentStatus(EquipmentStatus.AVAILABLE);
+
+		return equipmentRepository.save(equipment);
+
 	}
 
 }
