@@ -86,7 +86,21 @@ public class PlatformService {
 		return found.orElseThrow(() -> new NotFoundException("Platform with " + id + "not found."));
 	}
 	
-	// update by id Platform
+	
+	// update by id Platform (see 'update by id Platform with business logic')
+//	public Platform updatePlatform(UUID id, UpdatePlatformPayload body) {
+//		Platform found = getPlatformByID(id);
+//		
+//		found.setLocation(body.getLocation());
+//		found.setCustomerType(body.getCustomerType());
+//		found.setParcelsPerMonth(body.getParcelsPerMonth());
+//		found.setParcelRate(body.getParcelRate());
+//
+//		return platformRepository.save(found);
+//	
+//	}
+	
+	// * * * * * * * * * * update by id Platform with business logic
 	public Platform updatePlatform(UUID id, UpdatePlatformPayload body) {
 		Platform found = getPlatformByID(id);
 		
@@ -94,10 +108,24 @@ public class PlatformService {
 		found.setCustomerType(body.getCustomerType());
 		found.setParcelsPerMonth(body.getParcelsPerMonth());
 		found.setParcelRate(body.getParcelRate());
+		
+		// revenuesPerMonth calculation
+		BigDecimal parcelsPerMonth = body.getParcelsPerMonth();
+		BigDecimal parcelRate = body.getParcelRate();
+		BigDecimal revenuesPerMonth = parcelsPerMonth.multiply(parcelRate);
+		
+		// setRevenuesPerMonth
+		found.setRevenuesPerMonth(revenuesPerMonth);
+		
+		// updateTotalCostsPerMonth
+		found.updateTotalCostsPerMonth();
+		
+		// updateMarginPerMonth
+		found.updateMarginPerMonth();
 
 		return platformRepository.save(found);
-	
 	}
+	
 	
 	// delete by id Platform
 	public void deletePlatform(UUID id) {
