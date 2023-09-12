@@ -100,6 +100,9 @@ public class ResourceService {
         // updateTotalCostsPerMonth
         platform.updateTotalCostsPerMonth();
         
+        // updateMarginPerMonth
+        platform.updateMarginPerMonth();
+        
         platformService.savePlatform(platform);
 
 		return resourceRepository.save(resource);
@@ -135,6 +138,9 @@ public class ResourceService {
         
         // updateTotalCostsPerMonth
         platform.updateTotalCostsPerMonth();
+        
+        // updateMarginPerMonth
+        platform.updateMarginPerMonth();
 		
 		return resourceRepository.save(resource);
 	}

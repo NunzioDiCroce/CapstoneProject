@@ -105,4 +105,13 @@ public class Platform {
 		this.totalCostsPerMonth = totalCosts;
 	}
 	
+	// * * * * * * * * * * Platform marginPerMonth updating
+	public void updateMarginPerMonth() {
+        if (revenuesPerMonth != null && totalCostsPerMonth != null) {
+            marginPerMonth = revenuesPerMonth.subtract(totalCostsPerMonth);
+        } else {
+            marginPerMonth = BigDecimal.ZERO;
+        }
+	}
+	
 }
