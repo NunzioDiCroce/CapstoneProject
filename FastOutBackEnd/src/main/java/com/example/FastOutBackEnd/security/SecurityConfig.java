@@ -32,6 +32,10 @@ public class SecurityConfig {
 		
 		// Disable sessions to use JWT 
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/platforms/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/resources/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/equipments/**").authenticated());
 
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
