@@ -93,6 +93,9 @@ public class EquipmentService {
 		// updateTotalCostsPerMonth
         platform.updateTotalCostsPerMonth();
         
+        // updateMarginPerMonth
+        platform.updateMarginPerMonth();
+        
         platformService.savePlatform(platform);
 
 		return equipmentRepository.save(equipment);
@@ -119,6 +122,9 @@ public class EquipmentService {
 		
 		// updateTotalCostsPerMonth
         platform.updateTotalCostsPerMonth();
+        
+        // updateMarginPerMonth
+        platform.updateMarginPerMonth();
 
 		return equipmentRepository.save(equipment);
 
