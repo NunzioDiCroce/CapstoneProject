@@ -28,7 +28,7 @@ export class AuthService {
   constructor( private http:HttpClient, private router:Router ) { }
 
   login(data: { email:string; password:string }) {
-    return this.http.post<AuthData>(`${this.baseURL}login`, data).pipe(tap((data) => {
+    return this.http.post<AuthData>(`${this.baseURL}auth/login`, data).pipe(tap((data) => {
       console.log(data);
       this.authSubj.next(data);
       this.utente = data;
