@@ -7,12 +7,10 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 import { AuthService } from './auth.service';
 import { switchMap, take } from 'rxjs/operators';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
