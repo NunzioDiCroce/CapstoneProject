@@ -19,8 +19,8 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { PlatformDetailsComponent } from './components/platform-details/platform-details.component';
 import { ResourceDetailsComponent } from './components/resource-details/resource-details.component';
 import { EquipmentDetailsComponent } from './components/equipment-details/equipment-details.component';
-import { LoginComponent } from './auth/login/login/login.component';
-import { RegisterComponent } from './auth/register/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './components/profile/profile/profile.component';
 
 
