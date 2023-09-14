@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-// import Route, RouterModule per gestione rotte
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 import { Route, RouterModule } from '@angular/router';
-
-// import HttpClientModule per gestione metodi http
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { AuthGuard } from './auth/auth.guard';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -18,22 +19,35 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { PlatformDetailsComponent } from './components/platform-details/platform-details.component';
 import { ResourceDetailsComponent } from './components/resource-details/resource-details.component';
 import { EquipmentDetailsComponent } from './components/equipment-details/equipment-details.component';
-import { LoginComponent } from './auth/login/login/login.component';
-import { RegisterComponent } from './auth/register/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { ProfileComponent } from './components/profile/profile/profile.component';
+
 
 // definizione array delle rotte di tipo Route
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const routes: Route[] = [
   { path: '', component: HomeComponent },
-  { path: 'platforms', component: PlatformsComponent },
-  { path: 'platforms/:id', component: PlatformDetailsComponent },
-  { path: 'resources', component: ResourcesComponent },
-  { path: 'resources/:id', component: ResourceDetailsComponent },
-  { path: 'equipments', component: EquipmentsComponent },
-  { path: 'equipments/:id', component: EquipmentDetailsComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'users/:id', component: UserDetailsComponent },
+
+  { path: 'platforms', component: PlatformsComponent, canActivate: [AuthGuard] },
+  { path: 'platforms/:id', component: PlatformDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'resources', component: ResourcesComponent, canActivate: [AuthGuard] },
+  { path: 'resources/:id', component: ResourceDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'equipments', component: EquipmentsComponent, canActivate: [AuthGuard] },
+  { path: 'equipments/:id', component: EquipmentDetailsComponent, canActivate: [AuthGuard] },
+
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+  { path: 'users/:id', component: UserDetailsComponent, canActivate: [AuthGuard] },
+
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+
+  { path:'login', component:LoginComponent },
+  { path:'register', component:RegisterComponent },
+
   { path: '**', redirectTo: '' }
 ]
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 @NgModule({
   declarations: [
@@ -49,14 +63,18 @@ const routes: Route[] = [
     ResourceDetailsComponent,
     EquipmentDetailsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
-    // import RouterModule con metodo forRoot applicato alle rotte
-    RouterModule.forRoot(routes),
-    // import HttpClientModule per gestione metodi http
-    HttpClientModule
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    RouterModule.forRoot(routes), // import RouterModule con metodo forRoot applicato alle rotte
+    HttpClientModule, // import HttpClientModule per gestione metodi http
+    FormsModule
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   ],
   providers: [],
   bootstrap: [AppComponent]

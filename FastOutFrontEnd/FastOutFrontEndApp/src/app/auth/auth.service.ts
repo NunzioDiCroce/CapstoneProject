@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   signup(data: { name: string; surname: string; email:string; password:string }) {
-    return this.http.post(`${this.baseURL}register`, data);
+    return this.http.post(`${this.baseURL}auth/register`, data);
   }
 
   logout() {
