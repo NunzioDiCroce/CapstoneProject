@@ -30,7 +30,7 @@ export class PlatformsService {
     });
 
     return this.http.get<any>('http://localhost:3001/platforms', { headers }).pipe(map(response => response.content))
-
+    //return this.http.get<Platform[]>('http://localhost:3001/platforms', { headers });
   }
 
 }

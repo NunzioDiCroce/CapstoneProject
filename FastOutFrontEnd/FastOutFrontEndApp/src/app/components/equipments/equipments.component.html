@@ -1,1 +1,31 @@
-<p>equipments works!</p>
+<div class="container">
+  <div class="row">
+    <h4 class="mb-3">Equipments</h4>
+
+      <table class="table caption-top">
+        <!--<caption>Table caption</caption>-->
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">equipmentType</th>
+            <th scope="col">equipmentCost</th>
+            <th scope="col">serialNumber</th>
+            <th scope="col">equipmentStatus</th>
+            <th scope="col">platform</th>
+          </tr>
+        </thead>
+        <tbody class="col-12" *ngFor="let equipment of equipments">
+            <tr>
+              <th scope="row">1</th>
+              <td>{{ equipment.equipmentType }}</td>
+              <td>{{ equipment.equipmentCost }}</td>
+              <td>{{ equipment.serialNumber }}</td>
+              <td>{{ equipment.equipmentStatus }}</td>
+              <td>{{ equipment.platform }}</td>
+            </tr>
+        </tbody>
+      </table>
+
+  </div>
+</div>
+
