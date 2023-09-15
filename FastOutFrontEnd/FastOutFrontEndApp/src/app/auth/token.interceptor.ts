@@ -29,7 +29,7 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(request)
       }
 
-      this.newReq = request.clone({headers:request.headers.set('Authorization', `Bearer${user.accessToken}`)});
+      this.newReq = request.clone({headers:request.headers.set('Authorization', `Bearer ${user.accessToken}`)});
 
       console.log(request);
       console.log(this.newReq);
