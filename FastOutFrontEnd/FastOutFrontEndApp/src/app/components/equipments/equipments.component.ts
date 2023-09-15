@@ -48,6 +48,4 @@ export class EquipmentsComponent implements OnInit {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-
-
 }

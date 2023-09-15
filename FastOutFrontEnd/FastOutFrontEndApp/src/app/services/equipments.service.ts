@@ -31,5 +31,7 @@ export class EquipmentsService {
 
     return this.http.get<any>('http://localhost:3001/equipments', { headers }).pipe(map(response => response.content))
   }
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 }

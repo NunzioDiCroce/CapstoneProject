@@ -1,1 +1,29 @@
-<p>users works!</p>
+<div class="container">
+  <div class="row">
+    <h4 class="mb-3">Users</h4>
+
+      <table class="table caption-top">
+        <!--<caption>Table caption</caption>-->
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">name</th>
+            <th scope="col">surname</th>
+            <th scope="col">email</th>
+            <th scope="col">role</th>
+          </tr>
+        </thead>
+        <tbody class="col-12" *ngFor="let user of users">
+            <tr>
+              <th scope="row">1</th>
+              <td>{{ user.name }}</td>
+              <td>{{ user.surname }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role }}</td>
+            </tr>
+        </tbody>
+      </table>
+
+  </div>
+</div>
+
