@@ -1,1 +1,32 @@
 <p>resources works!</p>
+
+<div class="container">
+  <div class="row">
+    <h4 class="mb-3">Resources</h4>
+
+      <table class="table caption-top">
+        <!--<caption>Table caption</caption>-->
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">resourceType</th>
+            <th scope="col">resourceCost</th>
+            <th scope="col">hoursPerMonth</th>
+            <th scope="col">resourceStatus</th>
+            <th scope="col">platform</th>
+          </tr>
+        </thead>
+        <tbody class="col-12" *ngFor="let reource of resources">
+            <tr>
+              <th scope="row">1</th>
+              <td>{{ reource.resourceType }}</td>
+              <td>{{ reource.resourceCost }}</td>
+              <td>{{ reource.hoursPerMonth }}</td>
+              <td>{{ reource.resourceStatus }}</td>
+              <td>{{ reource.platform }}</td>
+            </tr>
+        </tbody>
+      </table>
+
+  </div>
+</div>
