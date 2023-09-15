@@ -35,6 +35,10 @@ export class PlatformsComponent implements OnInit {
       this.platforms = _platforms;
       console.log(this.platforms)
     });
+    //this.sub = this.platformsSrv.getPlatforms().subscribe((response: any) => {
+      //this.platforms = response.content;
+      //console.log(this.platforms)
+    //});
 
   }
 
