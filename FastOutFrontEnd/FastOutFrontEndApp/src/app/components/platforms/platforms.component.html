@@ -2,7 +2,6 @@
   <div class="row">
     <h4 class="mb-3">Platforms</h4>
     <div class="col-12" *ngFor="let platform of platforms">
-
       <div class="card mb-3">
         <div class="d-flex">
           <div style="width: 20%;">
@@ -24,14 +23,24 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
-
-  <button class="btn btn-primary" (click)="prevPage()">Previous Page</button>
-  <button class="btn btn-primary" (click)="nextPage()">Next Page</button>
-  <!--<p>Page {{ currentPage + 1 }} of {{ Math.ceil(totalItems / pageSize) }}</p>-->
-
+  <!-- Pagination -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
 
 </div>
+
+<!--<button class="btn btn-primary" (click)="prevPage()">Previous Page</button>-->
+<!--<button class="btn btn-primary" (click)="nextPage()">Next Page</button>-->
+<!--<p>Page {{ currentPage + 1 }} of {{ Math.ceil(totalItems / pageSize) }}</p>-->
+
+

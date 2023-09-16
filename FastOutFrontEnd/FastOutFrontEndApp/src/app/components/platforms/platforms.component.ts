@@ -28,6 +28,10 @@ export class PlatformsComponent implements OnInit {
   totalItems = 10;
   sortBy = 'id';
 
+  totalPages: number = 1; // Inizializzata a 1
+  itemsPerPage: number = 2; // Imposta il numero di elementi per pagina
+  pages: number[] = [];
+
   constructor( private platformsSrv:PlatformsService, private authSrv:AuthService ) { }
 
   ngOnInit(): void {
@@ -49,15 +53,31 @@ export class PlatformsComponent implements OnInit {
 
   // pagination
   loadPlatforms() {
-    this.sub = this.platformsSrv.getPlatforms(this.currentPage, this.pageSize, this.sortBy)
+    this.sub = this.platformsSrv.getPlatforms(this.currentPage, this.itemsPerPage, this.sortBy)
     .subscribe((_platforms:Platform[]) => {
       this.platforms = _platforms;
-      console.log(this.platforms)
+      console.log(this.platforms);
+
+      this.totalPages = Math.ceil(this.platforms.length / this.itemsPerPage);
+      this.calculatePages();
     });
     //this.sub = this.platformsSrv.getPlatforms().subscribe((response: any) => {
       //this.platforms = response.content;
       //console.log(this.platforms)
     //});
+  }
+
+  calculatePages() {
+    this.pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pages.push(i);
+    }
+  }
+
+  changePage(page: number) {
+    // Cambia la pagina e carica i dati per la nuova pagina
+    this.currentPage = page;
+    this.loadPlatforms();
   }
 
   // pagination
