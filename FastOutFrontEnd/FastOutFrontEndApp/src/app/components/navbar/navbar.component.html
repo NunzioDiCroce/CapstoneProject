@@ -42,7 +42,8 @@
 
       </ul>
 
-      <!-- <p class="me-3 mt-3" *ngIf="user">Hello {{ user.user.name }}</p> -->
+      <!--<p class="me-3 mt-3" *ngIf="user">Hello {{ user.user.name }}</p>-->
+      <p class="me-3 mt-3" *ngIf="user && user.user && user.user.name">Hello {{ user.user.name }}</p>
       <button class="btn btn-primary" type="button" *ngIf="user" (click)="logout()">Logout</button>
 
     </div>

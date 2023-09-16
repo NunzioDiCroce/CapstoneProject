@@ -1,1 +1,14 @@
-<p>profile works!</p>
+<div class="container">
+  <div class="row">
+    <h4 class="mb-3">Hello {{ user?.user?.name }}</h4>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text">Name: {{ user?.user?.name }}</p>
+        <p class="card-text">Surname: {{ user?.user?.surname }}</p>
+        <p class="card-text">Email: {{ user?.user?.email }}</p>
+        <p class="card-text">Role: {{ user?.user?.role }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
