@@ -22,6 +22,12 @@ export class PlatformsComponent implements OnInit {
   platforms: Platform[] | undefined;
   sub!: Subscription;
 
+  // pagination
+  currentPage = 0;
+  pageSize = 1;
+  totalItems = 10;
+  sortBy = 'id';
+
   constructor( private platformsSrv:PlatformsService, private authSrv:AuthService ) { }
 
   ngOnInit(): void {
@@ -31,7 +37,20 @@ export class PlatformsComponent implements OnInit {
       console.log(this.user)
     });
 
-    this.sub = this.platformsSrv.getPlatforms().subscribe((_platforms:Platform[]) => {
+    this.loadPlatforms(); // pagination
+
+  }
+
+  ngOnDestroy():void {
+    if(this.sub) {
+      this.sub.unsubscribe()
+    }
+  }
+
+  // pagination
+  loadPlatforms() {
+    this.sub = this.platformsSrv.getPlatforms(this.currentPage, this.pageSize, this.sortBy)
+    .subscribe((_platforms:Platform[]) => {
       this.platforms = _platforms;
       console.log(this.platforms)
     });
@@ -39,15 +58,22 @@ export class PlatformsComponent implements OnInit {
       //this.platforms = response.content;
       //console.log(this.platforms)
     //});
-
   }
 
-  ngOnDestroy():void {
-
-    if(this.sub) {
-      this.sub.unsubscribe()
+  // pagination
+  nextPage() {
+    if (this.currentPage < Math.ceil(this.totalItems / this.pageSize) - 1) {
+      this.currentPage++;
+      this.loadPlatforms();
     }
+  }
 
+  // pagination
+  prevPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.loadPlatforms();
+    }
   }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
