@@ -17,35 +17,67 @@ import { Subscription } from 'rxjs';
 export class UsersComponent implements OnInit {
 
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-user!: AuthData | null;
-users: User[] | undefined;
-sub!: Subscription;
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  user!: AuthData | null;
+  users: User[] | undefined;
+  sub!: Subscription;
 
-constructor( private usersSrv:UsersService, private authSrv:AuthService ) { }
+  // pagination
+  currentPage = 0;
+  pageSize = 10;
+  sortBy = 'id';
+  totalPages = 0;
+  totalPagesArray: number[] = [];
 
-ngOnInit(): void {
+  constructor( private usersSrv:UsersService, private authSrv:AuthService ) { }
 
-  this.authSrv.user$.subscribe((_user) => {
-    this.user = _user;
-    console.log(this.user)
-  });
-
-  this.sub = this.usersSrv.getUsers().subscribe((_users:User[]) => {
-    this.users = _users;
-    console.log(this.users)
-  });
-
-}
-
-ngOnDestroy():void {
-
-  if(this.sub) {
-    this.sub.unsubscribe()
+  ngOnInit(): void {
+    this.authSrv.user$.subscribe((_user) => {
+      this.user = _user;
+      console.log(this.user)
+    });
+    this.loadUsers(); // pagination
   }
 
-}
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // pagination
+  loadUsers(): void {
+    this.sub = this.usersSrv.getUsers(this.currentPage, this.pageSize, this.sortBy).subscribe((pageData: any) => {
+      this.users = pageData.content;
+      this.totalPages = pageData.totalPages;
+      this.totalPagesArray = Array(this.totalPages).fill(0).map((x, i) => i);
+    });
+  }
+
+  // pagination
+  prevPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.loadUsers();
+    }
+  }
+
+  // pagination
+  goToPage(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.loadUsers();
+    }
+  }
+
+  // pagination
+  nextPage(): void {
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++;
+      this.loadUsers();
+    }
+  }
+
+  ngOnDestroy():void {
+    if(this.sub) {
+      this.sub.unsubscribe()
+    }
+  }
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 }

@@ -15,11 +15,15 @@ export class UsersService {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   constructor( private http:HttpClient ) { }
 
-  getUsers() {
+  getUsers(page: number, size: number, sortBy: string) {
     const userString = localStorage.getItem('user');
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('sortBy', sortBy);
 
     if (!userString) {
-      return this.http.get<User[]>('http://localhost:3001/users');
+      return this.http.get<any>('http://localhost:3001/users', { params });
     }
 
     const user = JSON.parse(userString);
@@ -29,7 +33,15 @@ export class UsersService {
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.get<any>('http://localhost:3001/users', { headers }).pipe(map(response => response.content))
+    return this.http.get<any>('http://localhost:3001/users', { params, headers }).pipe(
+      map(response => {
+        return {
+          content: response.content, // to have current page data
+          totalElements: response.totalElements, // to have the total of elements
+          totalPages: Math.ceil(response.totalElements / size) // to have the total of pages
+        };
+      })
+    );
   }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
