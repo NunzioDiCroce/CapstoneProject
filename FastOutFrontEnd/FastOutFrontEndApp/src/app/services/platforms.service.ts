@@ -33,7 +33,16 @@ export class PlatformsService {
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.get<any>('http://localhost:3001/platforms', { params, headers }).pipe(map(response => response.content));
+    return this.http.get<any>('http://localhost:3001/platforms', { params, headers }).pipe(
+      map(response => {
+        return {
+          content: response.content, // to have current page data
+          totalElements: response.totalElements, // to have the total of elements
+          totalPages: Math.ceil(response.totalElements / size) // to have the total of pages
+        };
+      })
+    );
+    //return this.http.get<any>('http://localhost:3001/platforms', { params, headers }).pipe(map(response => response.content));
     //return this.http.get<any>('http://localhost:3001/platforms', { headers }).pipe(map(response => response.content))
     //return this.http.get<Platform[]>('http://localhost:3001/platforms', { headers })
   }

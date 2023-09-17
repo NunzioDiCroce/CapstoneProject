@@ -29,18 +29,15 @@
   <!-- Pagination -->
   <nav aria-label="Page navigation example">
     <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      <li class="page-item">
+        <a class="page-link" (click)="prevPage()">Previous</a></li>
+
+      <li class="page-item" *ngFor="let page of totalPagesArray">
+        <a class="page-link" (click)="goToPage(page)">{{ page + 1 }}</a></li>
+
+      <li class="page-item">
+        <a class="page-link" (click)="nextPage()">Next</a></li>
     </ul>
   </nav>
 
 </div>
-
-<!--<button class="btn btn-primary" (click)="prevPage()">Previous Page</button>-->
-<!--<button class="btn btn-primary" (click)="nextPage()">Next Page</button>-->
-<!--<p>Page {{ currentPage + 1 }} of {{ Math.ceil(totalItems / pageSize) }}</p>-->
-
-
