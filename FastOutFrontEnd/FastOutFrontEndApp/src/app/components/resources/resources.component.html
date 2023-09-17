@@ -13,9 +13,9 @@
             <th scope="col">platform</th>
           </tr>
         </thead>
-        <tbody class="col-12" *ngFor="let resource of resources">
+        <tbody class="col-12" *ngFor="let resource of resources; let i = index">
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">{{ currentRowNumber + i }}</th>
               <td>{{ resource.resourceType }}</td>
               <td>{{ resource.resourceCost }}</td>
               <td>{{ resource.hoursPerMonth }}</td>

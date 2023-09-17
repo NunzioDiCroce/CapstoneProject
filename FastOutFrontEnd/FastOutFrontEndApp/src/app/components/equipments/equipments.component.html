@@ -13,9 +13,9 @@
             <th scope="col">platform</th>
           </tr>
         </thead>
-        <tbody class="col-12" *ngFor="let equipment of equipments">
+        <tbody class="col-12" *ngFor="let equipment of equipments; let i = index">
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">{{ currentRowNumber + i }}</th>
               <td>{{ equipment.equipmentType }}</td>
               <td>{{ equipment.equipmentCost }}</td>
               <td>{{ equipment.serialNumber }}</td>

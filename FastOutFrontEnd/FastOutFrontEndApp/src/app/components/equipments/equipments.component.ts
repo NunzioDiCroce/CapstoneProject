@@ -29,6 +29,9 @@ export class EquipmentsComponent implements OnInit {
   totalPages = 0;
   totalPagesArray: number[] = [];
 
+  // table row number
+  currentRowNumber: number = 1;
+
   constructor( private equipmentsSrv:EquipmentsService, private authSrv:AuthService ) { }
 
   ngOnInit(): void {
@@ -46,6 +49,11 @@ export class EquipmentsComponent implements OnInit {
       this.totalPages = pageData.totalPages;
       this.totalPagesArray = Array(this.totalPages).fill(0).map((x, i) => i);
     });
+  }
+
+  // table row number
+  increaseRowNumber() {
+    this.currentRowNumber++;
   }
 
   // pagination
