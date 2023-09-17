@@ -22,28 +22,60 @@ export class ResourcesComponent implements OnInit {
   resources: Resource[] | undefined;
   sub!: Subscription;
 
+  // pagination
+  currentPage = 0;
+  pageSize = 10;
+  sortBy = 'id';
+  totalPages = 0;
+  totalPagesArray: number[] = [];
+
   constructor( private resourcesSrv:ResourcesService, private authSrv:AuthService ) { }
 
   ngOnInit(): void {
-
     this.authSrv.user$.subscribe((_user) => {
       this.user = _user;
       console.log(this.user)
     });
+    this.loadResources(); // pagination
+  }
 
-    this.sub = this.resourcesSrv.getResources().subscribe((_resources:Resource[]) => {
-      this.resources = _resources;
-      console.log(this.resources)
+  // pagination
+  loadResources(): void {
+    this.sub = this.resourcesSrv.getResources(this.currentPage, this.pageSize, this.sortBy).subscribe((pageData: any) => {
+      this.resources = pageData.content;
+      this.totalPages = pageData.totalPages;
+      this.totalPagesArray = Array(this.totalPages).fill(0).map((x, i) => i);
     });
+  }
 
+  // pagination
+  prevPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.loadResources();
+    }
+  }
+
+  // pagination
+  goToPage(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.loadResources();
+    }
+  }
+
+  // pagination
+  nextPage(): void {
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++;
+      this.loadResources();
+    }
   }
 
   ngOnDestroy():void {
-
     if(this.sub) {
       this.sub.unsubscribe()
     }
-
   }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
