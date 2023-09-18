@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody class="col-12" *ngFor="let resource of resources; let i = index">
-            <tr>
+            <tr (click)="navigateToResourceDetails(resource.id)">
               <th scope="row">{{ currentRowNumber + i }}</th>
               <td>{{ resource.resourceType }}</td>
               <td>{{ resource.resourceCost }}</td>

@@ -84,6 +84,10 @@ export class ResourcesComponent implements OnInit {
     this.router.navigate(['/createResource']);
   }
 
+  navigateToResourceDetails(resourceId: number): void {
+    this.router.navigate(['/resources', resourceId]);
+  }
+
   ngOnDestroy():void {
     if(this.sub) {
       this.sub.unsubscribe()
