@@ -17,6 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdatePlatformPayload {
 	
+	private String platformName;
 	private String location;
 	
 	@Enumerated(EnumType.STRING)

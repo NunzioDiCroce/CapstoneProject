@@ -34,6 +34,11 @@ public class PlatformService {
 	// * * * * * * * * * * create Platform with business logic
 	public Platform createPlatformSrv(Platform platform) {
 		
+        // check if platformName is not null and doesn't already exist
+        if (platform.getPlatformName() == null || platformRepository.findByPlatformName(platform.getPlatformName()).isPresent()) {
+            throw new IllegalArgumentException("Platform name must be unique and not null.");
+        }
+		
 		// set totalCostsPerMonth and hoursPerMonth at 0 (zero)
         if (platform.getTotalCostsPerMonth() == null) {
             platform.setTotalCostsPerMonth(BigDecimal.ZERO);
@@ -104,10 +109,21 @@ public class PlatformService {
 	public Platform updatePlatform(UUID id, UpdatePlatformPayload body) {
 		Platform found = getPlatformByID(id);
 		
+		// check if platformName is not null and doesn't already exist
+	    if (body.getPlatformName() != null && !body.getPlatformName().equals(found.getPlatformName()) &&
+	        platformRepository.findByPlatformName(body.getPlatformName()).isPresent()) {
+	        throw new IllegalArgumentException("Platform name must be unique and not null.");
+	    }
+		
 		found.setLocation(body.getLocation());
 		found.setCustomerType(body.getCustomerType());
 		found.setParcelsPerMonth(body.getParcelsPerMonth());
 		found.setParcelRate(body.getParcelRate());
+		
+		// check if platformName is not null
+	    if (body.getPlatformName() != null) {
+	        found.setPlatformName(body.getPlatformName());
+	    }
 		
 		// revenuesPerMonth calculation
 		BigDecimal parcelsPerMonth = body.getParcelsPerMonth();

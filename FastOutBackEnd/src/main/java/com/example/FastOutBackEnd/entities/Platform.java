@@ -8,6 +8,7 @@ import java.util.UUID;
 import com.example.FastOutBackEnd.enums.CustomerType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -33,6 +34,9 @@ public class Platform {
 	@Id
 	@GeneratedValue
 	private UUID id;
+	
+	@Column(nullable = false, unique = true)
+	private String platformName;
 	
 	private String location; // input field
 	
