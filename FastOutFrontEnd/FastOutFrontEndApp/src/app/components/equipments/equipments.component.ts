@@ -6,7 +6,7 @@ import { EquipmentsService } from 'src/app/services/equipments.service';
 import { AuthData } from 'src/app/auth/auth-data.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
-//import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Component({
@@ -32,7 +32,7 @@ export class EquipmentsComponent implements OnInit {
   // table row number
   currentRowNumber: number = 1;
 
-  constructor( private equipmentsSrv:EquipmentsService, private authSrv:AuthService ) { }
+  constructor( private equipmentsSrv:EquipmentsService, private authSrv:AuthService, private router: Router ) { }
 
   ngOnInit(): void {
     this.authSrv.user$.subscribe((_user) => {
@@ -78,6 +78,10 @@ export class EquipmentsComponent implements OnInit {
       this.currentPage++;
       this.loadEquipments();
     }
+  }
+
+  createEquipment(): void {
+    this.router.navigate(['/createEquipment']);
   }
 
   ngOnDestroy():void {

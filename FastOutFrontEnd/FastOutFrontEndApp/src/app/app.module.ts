@@ -24,6 +24,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './components/profile/profile/profile.component';
 import { PlatformCreateComponent } from './components/platform-create/platform-create.component';
 import { ResourceCreateComponent } from './components/resource-create/resource-create.component';
+import { EquipmentCreateComponent } from './components/equipment-create/equipment-create.component';
 
 
 // definizione array delle rotte di tipo Route
@@ -41,6 +42,7 @@ const routes: Route[] = [
 
   { path: 'equipments', component: EquipmentsComponent, canActivate: [AuthGuard] },
   { path: 'equipments/:id', component: EquipmentDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'createEquipment', component: EquipmentCreateComponent, canActivate: [AuthGuard] },
 
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'users/:id', component: UserDetailsComponent, canActivate: [AuthGuard] },
@@ -72,7 +74,8 @@ const routes: Route[] = [
     RegisterComponent,
     ProfileComponent,
     PlatformCreateComponent,
-    ResourceCreateComponent
+    ResourceCreateComponent,
+    EquipmentCreateComponent
   ],
   imports: [
     BrowserModule,
