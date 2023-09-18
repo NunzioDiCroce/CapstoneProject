@@ -8,6 +8,7 @@ import { AuthData } from 'src/app/auth/auth-data.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Component({
@@ -40,10 +41,16 @@ export class PlatformCreateComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  onSubmit(form:NgForm): void {
     this.platformsSrv.createPlatform(this.platform).subscribe(() => {
+      alert('Platform creation success!');
       this.router.navigate(['/platforms']);
     });
+  }
+
+  cancelCreation(): void {
+    alert('Platform creation cancelled!');
+    this.router.navigate(['/platforms']);
   }
 
 }
