@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 import { Resource } from '../models/resource.interface';
+import { ResourceCreate } from 'src/app/models/resource-create.interface';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Injectable({
@@ -13,7 +15,7 @@ export class ResourcesService {
 
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  constructor( private http:HttpClient ) { }
+  constructor( private http:HttpClient, private router: Router ) { }
 
   getResources(page: number, size: number, sortBy: string) {
     const userString = localStorage.getItem('user');
@@ -42,6 +44,24 @@ export class ResourcesService {
         };
       })
     );
+  }
+
+  createResource(resource: ResourceCreate): Observable<any> {
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null); // to return an empty observable
+    }
+
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.post<any>('http://localhost:3001/resources', resource, { headers });
   }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

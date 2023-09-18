@@ -6,7 +6,7 @@ import { ResourcesService } from 'src/app/services/resources.service';
 import { AuthData } from 'src/app/auth/auth-data.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
-//import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Component({
@@ -32,7 +32,7 @@ export class ResourcesComponent implements OnInit {
   // table row number
   currentRowNumber: number = 1;
 
-  constructor( private resourcesSrv:ResourcesService, private authSrv:AuthService ) { }
+  constructor( private resourcesSrv:ResourcesService, private authSrv:AuthService, private router: Router ) { }
 
   ngOnInit(): void {
     this.authSrv.user$.subscribe((_user) => {
@@ -78,6 +78,10 @@ export class ResourcesComponent implements OnInit {
       this.currentPage++;
       this.loadResources();
     }
+  }
+
+  createResource(): void {
+    this.router.navigate(['/createResource']);
   }
 
   ngOnDestroy():void {

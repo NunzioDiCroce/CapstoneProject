@@ -49,8 +49,8 @@ export class PlatformsService {
   }
 
   createPlatform(platform: PlatformCreate): Observable<any> {
-    const userString = localStorage.getItem('user');
 
+    const userString = localStorage.getItem('user');
     if (!userString) {
       this.router.navigate(['/login']);
       return of(null); // to return an empty observable
