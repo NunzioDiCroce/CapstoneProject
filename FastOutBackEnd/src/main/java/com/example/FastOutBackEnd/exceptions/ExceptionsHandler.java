@@ -30,7 +30,14 @@ public class ExceptionsHandler {
 	public ErrorsPayload handleBadRequest(BadRequestException e) {
 		return new ErrorsPayload(e.getMessage(), new Date());
 	}
-
+	
+	// to manage IllegalArgumentException for platformName not null and/or not unique
+	@ExceptionHandler(IllegalArgumentException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorsPayload handleIllegalArgumentException(IllegalArgumentException e) {
+	    return new ErrorsPayload(e.getMessage(), new Date());
+	}
+	
 	@ExceptionHandler(UnauthorizedException.class)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public ErrorsPayload handleUnauthorized(UnauthorizedException e) {
@@ -56,6 +63,5 @@ public class ExceptionsHandler {
 		e.printStackTrace();
 		return new ErrorsPayload("Generic error, we will resolve it as soon as possible.", new Date());
 	}
-
-	
+		
 }
