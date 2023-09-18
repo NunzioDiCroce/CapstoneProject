@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 import { Platform } from '../models/platform.interface';
+import { PlatformCreate } from 'src/app/models/platform-create.interface';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Injectable({
@@ -13,7 +15,7 @@ export class PlatformsService {
 
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  constructor( private http:HttpClient ) { }
+  constructor( private http:HttpClient, private router: Router ) { }
 
   getPlatforms(page: number, size: number, sortBy: string) {
     const userString = localStorage.getItem('user');
@@ -44,6 +46,24 @@ export class PlatformsService {
     );
     //return this.http.get<any>('http://localhost:3001/platforms', { params, headers }).pipe(map(response => response.content));
     //return this.http.get<Platform[]>('http://localhost:3001/platforms', { headers })
+  }
+
+  createPlatform(platform: PlatformCreate): Observable<any> {
+    const userString = localStorage.getItem('user');
+
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null); // to return an empty observable
+    }
+
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.post<any>('http://localhost:3001/platforms', platform, { headers });
   }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

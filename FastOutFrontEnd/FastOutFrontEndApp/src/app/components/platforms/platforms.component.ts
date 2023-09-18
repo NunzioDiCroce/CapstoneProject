@@ -6,7 +6,7 @@ import { PlatformsService } from 'src/app/services/platforms.service';
 import { AuthData } from 'src/app/auth/auth-data.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
-//import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Component({
@@ -29,7 +29,7 @@ export class PlatformsComponent implements OnInit {
   totalPages = 0;
   totalPagesArray: number[] = [];
 
-  constructor( private platformsSrv:PlatformsService, private authSrv:AuthService ) { }
+  constructor( private platformsSrv:PlatformsService, private authSrv:AuthService, private router: Router ) { }
 
   ngOnInit(): void {
     this.authSrv.user$.subscribe((_user) => {
@@ -72,7 +72,11 @@ export class PlatformsComponent implements OnInit {
     }
   }
 
-  ngOnDestroy():void {
+  createPlatform(): void {
+    this.router.navigate(['/createPlatform']);
+  }
+
+  ngOnDestroy(): void {
     if(this.sub) {
       this.sub.unsubscribe()
     }
