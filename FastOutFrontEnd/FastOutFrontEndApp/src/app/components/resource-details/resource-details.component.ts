@@ -27,7 +27,7 @@ export class ResourceDetailsComponent implements OnInit {
 
   resourceDetails: ResourceDetails | null = null;
 
-  availablePlatforms: any[] = [];
+  availablePlatforms: { content: any[] } = { content: [] };
   selectedPlatformId: string | null = null;
   assigningResource: boolean = false;
 
@@ -72,10 +72,12 @@ export class ResourceDetailsComponent implements OnInit {
   }
 
   loadAvailablePlatforms(): void {
-    this.resourcesSrv.getAvailablePlatforms().subscribe((platforms: any) => {
-      this.availablePlatforms = platforms;
+    this.resourcesSrv.getAvailablePlatforms().subscribe((platforms: { content: any[] }) => {
+      console.log(platforms);
+      //this.availablePlatforms = platforms.content; // ALTERNATIVE SOLUTION WORK IN PROGRESS
     });
   }
+
 
   assignResourceToPlatform(): void {
     if (this.resourceDetails && this.resourceDetails.id && this.selectedPlatformId && !this.assigningResource) {
