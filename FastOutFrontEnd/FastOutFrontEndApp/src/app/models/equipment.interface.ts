@@ -1,7 +1,7 @@
 export interface Equipment {
 
     // interface properties definition
-    id: number,
+    id: string,
 
     equipmentType: string,
 

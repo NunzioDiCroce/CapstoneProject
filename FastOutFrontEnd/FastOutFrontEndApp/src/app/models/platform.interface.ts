@@ -1,7 +1,7 @@
 export interface Platform {
 
   // interface properties definition
-  id: number,
+  id: string,
 
   platformName: string,
   location: string,

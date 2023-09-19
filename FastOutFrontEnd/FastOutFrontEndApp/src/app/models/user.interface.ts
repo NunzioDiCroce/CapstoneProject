@@ -1,7 +1,7 @@
 export interface User {
 
     // interface properties definition
-    id?: number,
+    id?: string,
 
     name: string,
     surname: string,
