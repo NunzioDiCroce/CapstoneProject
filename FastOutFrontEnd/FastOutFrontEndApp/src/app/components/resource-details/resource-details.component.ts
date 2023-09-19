@@ -27,6 +27,9 @@ export class ResourceDetailsComponent implements OnInit {
 
   resourceDetails: ResourceDetails | null = null;
 
+  availablePlatforms: any[] = [];
+  selectedPlatformId: string | null = null;
+  assigningResource: boolean = false;
 
   constructor( private resourcesSrv:ResourcesService, private authSrv:AuthService, private router: Router, private route: ActivatedRoute ) { }
 
@@ -40,6 +43,7 @@ export class ResourceDetailsComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const resourceId = params.get('id')!;
       this.loadResourceDetails(resourceId);
+      this.loadAvailablePlatforms();
     });
   }
 
@@ -47,6 +51,80 @@ export class ResourceDetailsComponent implements OnInit {
     this.sub = this.resourcesSrv.getResourceDetails(resourceId).subscribe((details: ResourceDetails) => {
       this.resourceDetails = details;
     });
+  }
+
+  changeResourceStatus(newStatus: string): void {
+    if (!this.resourceDetails) {
+      return;
+    }
+    const resourceId = this.resourceDetails.id;
+    if ((this.resourceDetails.resourceStatus === 'AVAILABLE' && newStatus === 'NOTAVAILABLE') ||
+        (this.resourceDetails.resourceStatus === 'NOTAVAILABLE' && newStatus === 'AVAILABLE')) {
+      this.resourcesSrv.changeResourceStatus(resourceId, newStatus).subscribe(
+        (updatedResource: ResourceDetails) => {
+          this.resourceDetails = updatedResource;
+        },
+        (error) => {
+          console.error('Errore durante il cambio di stato della risorsa:', error);
+        }
+      );
+    }
+  }
+
+  loadAvailablePlatforms(): void {
+    this.resourcesSrv.getAvailablePlatforms().subscribe((platforms: any) => {
+      this.availablePlatforms = platforms;
+    });
+  }
+
+  assignResourceToPlatform(): void {
+    if (this.resourceDetails && this.resourceDetails.id && this.selectedPlatformId && !this.assigningResource) {
+      this.assigningResource = true;
+      const assignPayload = {
+        resourceStatus: 'ASSIGNED',
+        platformId: this.selectedPlatformId
+      };
+
+      this.resourcesSrv.assignResource(this.resourceDetails.id, assignPayload).subscribe((result: any) => {
+        this.assigningResource = false;
+        if (result) {
+          //this.loadResourceDetails(this.resourceDetails.id); // TO CHECK because of "Object is possibly 'null'."
+          this.loadAvailablePlatforms();
+        }
+      });
+    }
+  }
+
+  removeResourceFromPlatform(): void {
+    if (this.resourceDetails && this.resourceDetails.id && !this.assigningResource) {
+      this.assigningResource = true;
+      const removePayload = {
+        resourceStatus: 'AVAILABLE'
+      };
+
+      this.resourcesSrv.removeResource(this.resourceDetails.id, removePayload).subscribe((result: any) => {
+        this.assigningResource = false;
+        if (result) {
+          //this.loadResourceDetails(this.resourceDetails.id); // TO CHECK because of "Object is possibly 'null'."
+          this.loadAvailablePlatforms();
+        }
+      });
+    }
+  }
+
+  deleteResource(): void {
+    if (!this.resourceDetails || !this.resourceDetails.id) {
+      return;
+    }
+    const resourceId = this.resourceDetails.id;
+    this.resourcesSrv.deleteResource(resourceId).subscribe(
+      () => {
+        this.router.navigate(['/resources']);
+      },
+      (error) => {
+        console.error('Errore durante l\'eliminazione della risorsa:', error);
+      }
+    );
   }
 
   ngOnDestroy():void {

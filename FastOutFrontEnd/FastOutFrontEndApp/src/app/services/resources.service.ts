@@ -79,6 +79,95 @@ export class ResourcesService {
 
     return this.http.get<any>(`http://localhost:3001/resources/${resourceId}`, { headers });
   }
+
+
+  changeResourceStatus(resourceId: string, newStatus: string): Observable<any> {
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null); // to return an empty observable
+    }
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    const body = {
+      resourceStatus: newStatus
+    };
+
+    return this.http.put<any>(`http://localhost:3001/resources/${resourceId}`, body, { headers });
+  }
+
+
+  getAvailablePlatforms(): Observable<any> {
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null); // to return an empty observable
+    }
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>('http://localhost:3001/platforms', { headers });
+  }
+
+
+  assignResource(resourceId: string, payload: any): Observable<any> {
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null);
+    }
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.put<any>(`http://localhost:3001/resources/${resourceId}/assign`, payload, { headers });
+  }
+
+
+  removeResource(resourceId: string, payload: any): Observable<any> {
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null);
+    }
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.put<any>(`http://localhost:3001/resources/${resourceId}/remove`, payload, { headers });
+  }
+
+
+  deleteResource(resourceId: string): Observable<any> {
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null); // to return an empty observable
+    }
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.delete<any>(`http://localhost:3001/resources/${resourceId}`, { headers });
+  }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
