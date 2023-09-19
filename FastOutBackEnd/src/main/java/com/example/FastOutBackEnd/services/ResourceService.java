@@ -57,8 +57,8 @@ public class ResourceService {
 	public Resource updateResource(UUID id, UpdateResourcePayload body) {
 		Resource found = getResourceByID(id);
 			
-		found.setResourceType(body.getResourceType());
-		found.setResourceCost(body.getResourceCost());
+		//found.setResourceType(body.getResourceType()); // commented to update only resourceStatus
+		//found.setResourceCost(body.getResourceCost()); // commented to update only resourceStatus
 		found.setResourceStatus(body.getResourceStatus());
 
 		return resourceRepository.save(found);
