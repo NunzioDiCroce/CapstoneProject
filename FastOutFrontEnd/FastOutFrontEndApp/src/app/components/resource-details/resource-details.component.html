@@ -22,9 +22,8 @@
       <label for="platformSelect">Seleziona una piattaforma:</label>
       <select id="platformSelect" class="form-control" [(ngModel)]="selectedPlatformId">
         <option value="" disabled selected>Scegli una piattaforma</option>
-        <option *ngFor="let platform of availablePlatforms.content" [value]="platform.id">{{ platform.platformName }}</option>
+        <option *ngFor="let platform of availablePlatforms" [value]="platform.id">{{ platform.platformName }}</option>
       </select>
-      {{ availablePlatforms | json }}
       <button class="btn btn-primary mt-2" (click)="assignResourceToPlatform()">Associa alla piattaforma</button>
     </div>
 

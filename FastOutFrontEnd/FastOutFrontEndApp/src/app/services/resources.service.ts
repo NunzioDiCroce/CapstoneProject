@@ -115,7 +115,7 @@ export class ResourcesService {
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.get<any>('http://localhost:3001/platforms', { headers });
+    return this.http.get<any>('http://localhost:3001/platforms/all', { headers });
   }
 
 
