@@ -1,5 +1,6 @@
 package com.example.FastOutBackEnd.controllers;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,15 @@ public class PlatformController {
 	}
 	
 	
-	// find all Platforms
-	// refers to 'find all Platforms pagination'
-	
+	// find all Platforms without pagination
+	// NOTE: this method is used only to loadAvailablePlatforms for
+	// assign/removeResourceToPlatform frontEnd functionality
+	// assign/removeEquipmentToPlatform frontEnd functionality
+	@GetMapping("/all")
+	public List<Platform> getAvailablePlatforms() {
+	    return platformService.getAllPlatforms();
+	}
+
 	
 	// find all Platforms pagination
 	@GetMapping
