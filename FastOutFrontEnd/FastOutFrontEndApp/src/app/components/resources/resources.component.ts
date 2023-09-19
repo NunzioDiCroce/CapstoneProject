@@ -84,7 +84,7 @@ export class ResourcesComponent implements OnInit {
     this.router.navigate(['/createResource']);
   }
 
-  navigateToResourceDetails(resourceId: number): void {
+  navigateToResourceDetails(resourceId: string): void {
     this.router.navigate(['/resources', resourceId]);
   }
 

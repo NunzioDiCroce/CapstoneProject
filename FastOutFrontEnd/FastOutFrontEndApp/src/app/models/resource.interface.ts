@@ -1,15 +1,10 @@
 export interface Resource {
 
-    // interface properties definition
-    id: number,
-
+    id: string,
     resourceType: string,
-
     resourceCost: number,
     hoursPerMonth: number,
-
     resourceStatus: string,
-
     platform: string
 
 }

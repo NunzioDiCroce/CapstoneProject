@@ -1,1 +1,9 @@
 <p>resource-details works!</p>
+
+<div *ngIf="resourceDetails">
+  <h2>{{ resourceDetails.resourceType }}</h2>
+  <p>Resource Cost: {{ resourceDetails.resourceCost }}</p>
+  <p>Hours Per Month: {{ resourceDetails.hoursPerMonth }}</p>
+  <p>Resource Status: {{ resourceDetails.resourceStatus }}</p>
+  <p>Platform: {{ resourceDetails.platform }}</p>
+</div>

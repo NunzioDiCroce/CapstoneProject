@@ -67,5 +67,12 @@ export class ResourceCreateComponent implements OnInit {
     this.router.navigate(['/resources']);
   }
 
+  ngOnDestroy():void {
+    if(this.sub) {
+      this.sub.unsubscribe()
+    }
+  }
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 }
