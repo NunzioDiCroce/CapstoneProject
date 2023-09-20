@@ -7,6 +7,7 @@ import { ResourceDetails } from 'src/app/models/resource-details.interface'
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { Platform } from '../models/platform.interface';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Injectable({

@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="form-group" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE'">
+    <div class="form-group" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE' && dataLoaded">
       <label for="platformSelect">Seleziona una piattaforma:</label>
       <select id="platformSelect" class="form-control" [(ngModel)]="selectedPlatformId">
         <option value="" disabled selected>Scegli una piattaforma</option>
@@ -39,6 +39,8 @@
         <button class="btn btn-warning" (click)="deleteResource()">Cancella la risorsa</button>
       </div>
     </div>
+
+    <button type="button" class="btn btn-secondary" (click)="navigateBack()">Back</button>
 
   </div>
 </div>

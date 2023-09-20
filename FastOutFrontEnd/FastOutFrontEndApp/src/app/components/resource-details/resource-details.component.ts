@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { Platform } from 'src/app/models/platform.interface';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Component({
@@ -27,9 +28,11 @@ export class ResourceDetailsComponent implements OnInit {
 
   resourceDetails: ResourceDetails | null = null;
 
-  availablePlatforms: any[] = [];
+  availablePlatforms: Platform[] = [];
   selectedPlatformId: string | null = null;
   assigningResource: boolean = false;
+
+  dataLoaded = false; // boolean to track data loading for loadAvailablePlatforms
 
   constructor( private resourcesSrv:ResourcesService, private authSrv:AuthService, private router: Router, private route: ActivatedRoute ) { }
 
@@ -43,7 +46,13 @@ export class ResourceDetailsComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const resourceId = params.get('id')!;
       this.loadResourceDetails(resourceId);
-      this.loadAvailablePlatforms();
+
+      // setTimeout to loadAvailablePlatforms with delay
+      setTimeout(() => {
+        this.loadAvailablePlatforms();
+        console.log(this.availablePlatforms);
+      }, 1000);
+      console.log(this.availablePlatforms);
     });
   }
 
@@ -72,9 +81,15 @@ export class ResourceDetailsComponent implements OnInit {
   }
 
   loadAvailablePlatforms(): void {
-    this.resourcesSrv.getAvailablePlatforms().subscribe((platforms: any ) => {
+    this.resourcesSrv.getAvailablePlatforms().subscribe((platforms: Platform[] ) => {
       console.log(platforms);
-      this.availablePlatforms = platforms.content;
+      if (platforms) {
+        this.availablePlatforms = platforms;
+      }
+      this.dataLoaded = true; // boolean to track data loading for loadAvailablePlatforms
+      console.log(this.dataLoaded);
+      console.log(typeof platforms);
+      //console.log(typeof platforms.content);
     });
   }
 
@@ -126,6 +141,10 @@ export class ResourceDetailsComponent implements OnInit {
         console.error('Errore durante l\'eliminazione della risorsa:', error);
       }
     );
+  }
+
+  navigateBack(): void {
+    this.router.navigate(['/resources']);
   }
 
   ngOnDestroy():void {
