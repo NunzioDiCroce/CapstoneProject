@@ -85,8 +85,9 @@ export class ResourceDetailsComponent implements OnInit {
       console.log(platforms);
       if (platforms) {
         this.availablePlatforms = platforms;
+        this.dataLoaded = true; // boolean to track data loading for loadAvailablePlatforms
       }
-      this.dataLoaded = true; // boolean to track data loading for loadAvailablePlatforms
+      //this.dataLoaded = true; // boolean to track data loading for loadAvailablePlatforms
       console.log(this.dataLoaded);
       console.log(typeof platforms);
       //console.log(typeof platforms.content);

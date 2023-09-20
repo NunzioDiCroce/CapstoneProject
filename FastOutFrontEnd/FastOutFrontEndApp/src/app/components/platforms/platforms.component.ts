@@ -44,6 +44,7 @@ export class PlatformsComponent implements OnInit {
     this.sub = this.platformsSrv.getPlatforms(this.currentPage, this.pageSize, this.sortBy).subscribe((pageData: any) => {
       this.platforms = pageData.content;
       this.totalPages = pageData.totalPages;
+      // to create an array with length equal to the total number of available pages (totalPages)
       this.totalPagesArray = Array(this.totalPages).fill(0).map((x, i) => i);
     });
   }
