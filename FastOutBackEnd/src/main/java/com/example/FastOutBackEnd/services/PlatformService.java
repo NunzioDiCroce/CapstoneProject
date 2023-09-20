@@ -23,8 +23,8 @@ public class PlatformService {
 	
 	@Autowired
 	private PlatformRepository platformRepository;
-	
-	
+
+		
 	// save Platform
 	public Platform savePlatform(Platform platform) {
 		return platformRepository.save(platform);
@@ -148,5 +148,6 @@ public class PlatformService {
 		Platform found = getPlatformByID(id);
 		platformRepository.delete(found);
 	}
+	
 
 }
