@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.FastOutBackEnd.entities.Platform;
+import com.example.FastOutBackEnd.entities.Resource;
 import com.example.FastOutBackEnd.payloads.UpdatePlatformPayload;
 import com.example.FastOutBackEnd.services.PlatformService;
 
@@ -77,5 +78,14 @@ public class PlatformController {
 	public void deletePlatform(@PathVariable UUID id) {
 		platformService.deletePlatform(id);
 	}
+	
+	
+	// get resources associated with the platform
+	@GetMapping("/{platformId}/resources")
+	public List<Resource> getResourcesForPlatform(@PathVariable UUID platformId) {    
+	    Platform platform = platformService.getPlatformByID(platformId);
+	    return platform.getResources();
+	}
+
 
 }
