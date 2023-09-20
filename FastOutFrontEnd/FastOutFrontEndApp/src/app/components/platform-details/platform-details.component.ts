@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { Resource } from 'src/app/models/resource.interface';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Component({
@@ -25,6 +26,8 @@ user!: AuthData | null;
 sub!: Subscription;
 
 platformDetails: PlatformDetails | null = null;
+
+resourcesForPlatform: Resource[] = [];
 
 constructor( private platformsSrv:PlatformsService, private authSrv:AuthService, private router: Router, private route: ActivatedRoute ) { }
 
@@ -44,6 +47,13 @@ ngOnInit(): void {
 loadPlatformDetails(platformId: string): void {
   this.sub = this.platformsSrv.getPlatformDetails(platformId).subscribe((details: PlatformDetails) => {
     this.platformDetails = details;
+    this.loadResourcesForPlatform(platformId);
+  });
+}
+
+loadResourcesForPlatform(platformId: string) {
+  this.platformsSrv.getResourcesForPlatform(platformId).subscribe(resourcesForPlatform => {
+    this.resourcesForPlatform = resourcesForPlatform;
   });
 }
 

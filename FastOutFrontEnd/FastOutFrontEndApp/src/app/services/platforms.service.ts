@@ -7,6 +7,7 @@ import { PlatformDetails } from 'src/app/models/platform-details.interface';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { Resource } from '../models/resource.interface';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Injectable({
@@ -82,6 +83,23 @@ export class PlatformsService {
     });
 
     return this.http.get<any>(`http://localhost:3001/platforms/${platformId}`, { headers });
+  }
+
+
+  getResourcesForPlatform(platformId: string): Observable<any>  {
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null); // to return an empty observable
+    }
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(`http://localhost:3001/platforms/${platformId}/resources`, { headers });
   }
 
 

@@ -23,6 +23,32 @@
 
     <button type="button" class="btn btn-secondary" (click)="navigateBack()">Back</button>
 
+    <!-- resourcesForPlatform table -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Risorse associate</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>resourceType</th>
+              <th>resourceCost</th>
+              <th>hoursPerMonth</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let resource of resourcesForPlatform">
+              <td>{{ resource }}</td>
+              <td>{{ resource.resourceType }}</td>
+              <td>{{ resource.resourceCost }}</td>
+              <td>{{ resource.hoursPerMonth }}</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>
 
