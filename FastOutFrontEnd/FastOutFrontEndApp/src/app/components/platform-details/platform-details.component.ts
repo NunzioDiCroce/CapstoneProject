@@ -61,6 +61,11 @@ deletePlatform(): void {
   if (!this.platformDetails || !this.platformDetails.id) {
     return;
   }
+  // check whether resources and/or equipment are associated with the platform before deleting it
+  if (this.resourcesForPlatform.length > 0) {
+    alert("Before deleting the platform it is necessary to remove the resources and equipment associated with it.");
+    return;
+  }
   const platformId = this.platformDetails.id;
   this.platformsSrv.deletePlatform(platformId).subscribe(
     () => {
