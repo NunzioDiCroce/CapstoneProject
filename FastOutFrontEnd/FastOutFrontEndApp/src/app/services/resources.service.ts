@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 import { Resource } from '../models/resource.interface';
 import { ResourceCreate } from 'src/app/models/resource-create.interface';
-import { ResourceDetails } from 'src/app/models/resource-details.interface'
+import { ResourceDetails } from 'src/app/models/resource-details.interface';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';

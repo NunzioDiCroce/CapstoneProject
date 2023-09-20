@@ -139,7 +139,7 @@ export class ResourceDetailsComponent implements OnInit {
         this.router.navigate(['/resources']);
       },
       (error) => {
-        console.error('Errore durante l\'eliminazione della risorsa:', error);
+        console.error('Error deleting resource:', error);
       }
     );
   }
@@ -154,5 +154,6 @@ export class ResourceDetailsComponent implements OnInit {
     }
   }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 }

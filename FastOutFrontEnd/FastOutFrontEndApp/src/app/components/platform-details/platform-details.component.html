@@ -1,7 +1,3 @@
-<p>platform-details works!</p>
-
-
-<!--
 <div class="container">
   <div class="row" *ngIf="platformDetails">
     <h4 class="mb-3">{{ platformDetails.platformName }}</h4>
@@ -19,32 +15,9 @@
       </div>
     </div>
 
-    <div class="card mb-3" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE' || resourceDetails.resourceStatus === 'NOTAVAILABLE'">
+    <div class="card mb-3">
       <div class="card-body">
-        <button class="btn btn-warning" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE'" (click)="changeResourceStatus('NOTAVAILABLE')">Cambia stato in NOTAVAILABLE</button>
-        <button class="btn btn-success" *ngIf="resourceDetails.resourceStatus === 'NOTAVAILABLE'" (click)="changeResourceStatus('AVAILABLE')">Cambia stato in AVAILABLE</button>
-      </div>
-    </div>
-
-    <div class="form-group" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE' && dataLoaded">
-      <label for="platformSelect">Seleziona una piattaforma:</label>
-      <select id="platformSelect" class="form-control" [(ngModel)]="selectedPlatformId">
-        <option value="" disabled selected>Scegli una piattaforma</option>
-        <option *ngFor="let platform of availablePlatforms" [value]="platform.id">{{ platform.platformName }}</option>
-      </select>
-      <button class="btn btn-primary mt-2" (click)="assignResourceToPlatform()">Associa alla piattaforma</button>
-    </div>
-
-    <div class="card mb-3" *ngIf="resourceDetails.resourceStatus === 'ASSIGNED'">
-      <div class="card-body">
-        <p class="card-text">Piattaforma: {{ resourceDetails.platform }}</p>
-        <button class="btn btn-danger" (click)="removeResourceFromPlatform()">Rimuovi dalla piattaforma</button>
-      </div>
-    </div>
-
-    <div class="card mb-3" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE' || resourceDetails.resourceStatus === 'NOTAVAILABLE'">
-      <div class="card-body">
-        <button class="btn btn-warning" (click)="deleteResource()">Cancella la risorsa</button>
+        <button class="btn btn-warning" (click)="deletePlatform()">Cancella la piattaforma</button>
       </div>
     </div>
 
@@ -52,7 +25,7 @@
 
   </div>
 </div>
--->
+
 
 
 
