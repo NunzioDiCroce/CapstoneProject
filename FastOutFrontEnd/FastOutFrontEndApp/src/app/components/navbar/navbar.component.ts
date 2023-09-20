@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
 
     this.authSrv.user$.subscribe((_user) => {
       this.user = _user;
-      console.log(this.user)
+      console.log(this.user);
     });
   }
 

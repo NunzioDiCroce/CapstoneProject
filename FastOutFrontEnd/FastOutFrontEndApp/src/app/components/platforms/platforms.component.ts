@@ -77,6 +77,10 @@ export class PlatformsComponent implements OnInit {
     this.router.navigate(['/createPlatform']);
   }
 
+  navigateToPlatformDetails(platformId: string): void {
+    this.router.navigate(['/platforms', platformId]);
+  }
+
   ngOnDestroy(): void {
     if(this.sub) {
       this.sub.unsubscribe()

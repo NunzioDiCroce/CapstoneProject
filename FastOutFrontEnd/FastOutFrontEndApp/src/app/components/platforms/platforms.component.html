@@ -19,7 +19,7 @@
               <p class="card-text">totalCostsPerMonth: {{ platform.totalCostsPerMonth }}</p>
               <p class="card-text">marginPerMonth: {{ platform.marginPerMonth }}</p>
               <hr>
-              <a href="#" class="btn btn-primary">Platform details</a>
+              <a (click)="navigateToPlatformDetails(platform.id)" class="btn btn-primary">Platform details</a>
             </div>
           </div>
         </div>
