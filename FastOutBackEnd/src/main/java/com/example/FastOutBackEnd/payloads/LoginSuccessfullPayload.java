@@ -1,5 +1,7 @@
 package com.example.FastOutBackEnd.payloads;
 
+import com.example.FastOutBackEnd.entities.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +12,6 @@ import lombok.Setter;
 public class LoginSuccessfullPayload {
 	
 	String accessToken;
+	User user;
 
 }
