@@ -59,6 +59,7 @@
   background-color: rgb(0, 0, 0);
   border-color:rgb(0, 0, 0);
   color: rgb(255, 230, 0);
+  text-align: center;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -67,7 +68,16 @@
   border-color:rgb(255, 230, 0);
   color: rgb(0, 0, 0);
 }
+
 .pageBtn {
   color: rgb(0, 0, 0);
   cursor: pointer;
+}
+.pageBtn:hover {
+  color: rgb(0, 0, 0);
+}
+.pageBtn.active {
+  background-color: rgb(255, 230, 0);
+  border-color:rgb(255, 230, 0);
+  color: black;
 }

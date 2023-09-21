@@ -24,6 +24,7 @@ export class PlatformsComponent implements OnInit {
 
   // pagination
   currentPage = 0;
+  currentPageIndex = 0;
   pageSize = 1;
   sortBy = 'id';
   totalPages = 0;
@@ -53,6 +54,7 @@ export class PlatformsComponent implements OnInit {
   prevPage(): void {
     if (this.currentPage > 0) {
       this.currentPage--;
+      this.currentPageIndex = this.currentPage;
       this.loadPlatforms();
     }
   }
@@ -61,6 +63,7 @@ export class PlatformsComponent implements OnInit {
   goToPage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.currentPage = page;
+      this.currentPageIndex = page;
       this.loadPlatforms();
     }
   }
@@ -69,6 +72,7 @@ export class PlatformsComponent implements OnInit {
   nextPage(): void {
     if (this.currentPage < this.totalPages - 1) {
       this.currentPage++;
+      this.currentPageIndex = this.currentPage;
       this.loadPlatforms();
     }
   }

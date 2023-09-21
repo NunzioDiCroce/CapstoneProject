@@ -51,15 +51,11 @@ export class ResourcesComponent implements OnInit {
     });
   }
 
-  // table row number
-  increaseRowNumber() {
-    this.currentRowNumber++;
-  }
-
   // pagination
   prevPage(): void {
     if (this.currentPage > 0) {
       this.currentPage--;
+      this.currentRowNumber = this.currentPage * this.pageSize + 1;
       this.loadResources();
     }
   }
@@ -68,6 +64,7 @@ export class ResourcesComponent implements OnInit {
   goToPage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.currentPage = page;
+      this.currentRowNumber = this.currentPage * this.pageSize + 1;
       this.loadResources();
     }
   }
@@ -76,6 +73,7 @@ export class ResourcesComponent implements OnInit {
   nextPage(): void {
     if (this.currentPage < this.totalPages - 1) {
       this.currentPage++;
+      this.currentRowNumber = this.currentPage * this.pageSize + 1;
       this.loadResources();
     }
   }
