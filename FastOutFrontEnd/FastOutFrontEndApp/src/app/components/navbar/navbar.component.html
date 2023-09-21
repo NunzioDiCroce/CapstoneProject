@@ -4,9 +4,9 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" [routerLink]="['/']" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">Home</a>
@@ -39,13 +39,13 @@
         <li class="nav-item" *ngIf="!user">
           <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Register</a>
         </li>
-
       </ul>
-
-      <!--<p class="me-3 mt-3" *ngIf="user">Hello {{ user.user.name }}</p>-->
-      <p class="me-3 mt-3" *ngIf="user && user.user && user.user.name">Hello {{ user.user.name }}</p>
-      <button class="btn btn-primary" type="button" *ngIf="user" (click)="logout()">Logout</button>
-
     </div>
+
+    <div class="d-flex align-items-center ms-auto">
+      <p class="me-3 mb-0" *ngIf="user && user.user && user.user.name">Hello {{ user.user.name }} {{ user.user.surname }}</p>
+      <button class="btn btn-secondary navBtn" type="button" *ngIf="user" (click)="logout()">Logout</button>
+    </div>
+
   </div>
 </nav>

@@ -25,26 +25,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('./assets/images/homeBackground.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 87vh;
+  //background-image: url('./assets/images/homeBackground.jpg');
+  //background-size: cover;
+  //background-position: center;
+  //background-repeat: no-repeat;
+  height: 86vh;
   width: 100vw;
   //margin: 0;
   padding: 10vw;
 }
 
 // buttons
-.btn {
+.homeBtn, .loginBtn, .registerBtn, .navBtn {
   width: 90px;
   background-color: rgb(0, 0, 0);
   border-color:rgb(0, 0, 0);
   color: rgb(255, 230, 0);
 }
-
-// login
-.homeTemplate {
-  margin-top: 10%;
-}
-
