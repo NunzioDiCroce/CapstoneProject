@@ -24,6 +24,7 @@ export class UsersComponent implements OnInit {
 
   // pagination
   currentPage = 0;
+  currentPageIndex = 0;
   pageSize = 10;
   sortBy = 'id';
   totalPages = 0;
@@ -55,6 +56,7 @@ export class UsersComponent implements OnInit {
   prevPage(): void {
     if (this.currentPage > 0) {
       this.currentPage--;
+      this.currentPageIndex = this.currentPage;
       this.currentRowNumber = this.currentPage * this.pageSize + 1;
       this.loadUsers();
     }
@@ -64,6 +66,7 @@ export class UsersComponent implements OnInit {
   goToPage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.currentPage = page;
+      this.currentPageIndex = page;
       this.currentRowNumber = this.currentPage * this.pageSize + 1;
       this.loadUsers();
     }
@@ -73,6 +76,7 @@ export class UsersComponent implements OnInit {
   nextPage(): void {
     if (this.currentPage < this.totalPages - 1) {
       this.currentPage++;
+      this.currentPageIndex = this.currentPage;
       this.currentRowNumber = this.currentPage * this.pageSize + 1;
       this.loadUsers();
     }
