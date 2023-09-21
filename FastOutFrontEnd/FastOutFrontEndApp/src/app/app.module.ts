@@ -24,6 +24,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PlatformCreateComponent } from './components/platform-create/platform-create.component';
 import { ResourceCreateComponent } from './components/resource-create/resource-create.component';
 import { EquipmentCreateComponent } from './components/equipment-create/equipment-create.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 // definizione array delle rotte di tipo Route
@@ -71,7 +72,8 @@ const routes: Route[] = [
     ProfileComponent,
     PlatformCreateComponent,
     ResourceCreateComponent,
-    EquipmentCreateComponent
+    EquipmentCreateComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
