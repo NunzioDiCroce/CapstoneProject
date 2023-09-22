@@ -81,3 +81,38 @@
   border-color:rgb(255, 230, 0);
   color: black;
 }
+
+.createBtn {
+  width: 180px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.createBtn:hover {
+  background-color: rgb(255, 230, 0);
+  border-color:rgb(255, 230, 0);
+  color: rgb(0, 0, 0);
+}
+
+
+
+// resources
+.resourceRowTable {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.resourceRowTable:hover {
+  background-color: rgb(255, 230, 0);
+}
+
+.available {
+  color: green;
+  //font-weight: bold;
+}
+.notAvailable {
+  color: red;
+  //font-weight: bold;
+}
+.assigned {
+  color: black;
+  //font-weight: bold;
+}
+

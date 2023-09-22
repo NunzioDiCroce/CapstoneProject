@@ -1,25 +1,34 @@
 <div class="container">
+
   <div class="row">
-    <button class="btn btn-primary" (click)="createResource()">Create Resource</button>
-    <h4 class="mb-3">Resources</h4>
+    <div class="col-sm-8">
+      <h4 class="mb-3 mt-3">Resources</h4>
+    </div>
+    <div class="col-sm-4 d-flex justify-content-end align-items-center">
+      <button class="btn btn-success createBtn" (click)="createResource()">New Resource</button>
+    </div>
+
       <table class="table caption-top">
         <!--<caption>Table caption</caption>-->
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">resourceType</th>
-            <th scope="col">resourceCost</th>
-            <th scope="col">resourceStatus</th>
-            <th scope="col">platform</th>
+            <th scope="col">Type</th>
+            <th scope="col">Monthly cost</th>
+            <th scope="col">Status</th>
+            <th scope="col">Platform</th>
           </tr>
         </thead>
         <tbody class="col-12">
-            <tr *ngFor="let resource of resources; let i = index" (click)="navigateToResourceDetails(resource.id)">
+            <tr *ngFor="let resource of resources; let i = index" (click)="navigateToResourceDetails(resource.id)"
+            class="resourceRowTable">
               <th scope="row">{{ currentRowNumber + i }}</th>
               <td>{{ resource.resourceType }}</td>
-              <td>{{ resource.resourceCost }}</td>
-              <td>{{ resource.resourceStatus }}</td>
-              <td>{{ resource.platform }}</td>
+              <td>€ {{ resource.resourceCost }}</td>
+              <td [ngClass]="getResourceStatusClass(resource.resourceStatus)">{{ resource.resourceStatus }}</td>
+              <!-- to access 'platformName' property which may be null -->
+              <td *ngIf="resource.platform">{{ resource.platform.platformName }}</td>
+              <td *ngIf="!resource.platform"></td>
             </tr>
         </tbody>
       </table>

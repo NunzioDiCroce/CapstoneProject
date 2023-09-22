@@ -90,6 +90,20 @@ export class ResourcesComponent implements OnInit {
     this.router.navigate(['/resources', resourceId]);
   }
 
+  // to set status color into resources table
+  getResourceStatusClass(status: string): string {
+    switch (status) {
+      case 'AVAILABLE':
+        return 'available';
+      case 'NOTAVAILABLE':
+        return 'notAvailable';
+      case 'ASSIGNED':
+        return 'assigned';
+      default:
+        return '';
+    }
+  }
+
   ngOnDestroy():void {
     if(this.sub) {
       this.sub.unsubscribe()

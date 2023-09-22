@@ -5,6 +5,8 @@ export interface Resource {
     resourceCost: number,
     hoursPerMonth: number,
     resourceStatus: string,
-    platform: string
+    platform: {
+      platformName: string
+    }
 
 }
