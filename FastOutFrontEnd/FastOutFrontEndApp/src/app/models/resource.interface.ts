@@ -5,6 +5,7 @@ export interface Resource {
     resourceCost: number,
     hoursPerMonth: number,
     resourceStatus: string,
+    // to access 'platformName' property for Resources table
     platform: {
       platformName: string
     }
