@@ -63,8 +63,10 @@ export class ResourceCreateComponent implements OnInit {
   }
 
   cancelCreation(): void {
-    alert('Resource creation cancelled!');
-    this.router.navigate(['/resources']);
+    const confirmation = window.confirm('Are you sure you want to cancel the current operation?');
+    if (confirmation) {
+      this.router.navigate(['/resources']);
+    }
   }
 
   ngOnDestroy():void {
