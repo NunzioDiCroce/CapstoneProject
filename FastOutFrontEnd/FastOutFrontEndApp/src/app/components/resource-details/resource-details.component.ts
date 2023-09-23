@@ -47,11 +47,12 @@ export class ResourceDetailsComponent implements OnInit {
       const resourceId = params.get('id')!;
       this.loadResourceDetails(resourceId);
 
+      this.loadAvailablePlatforms();
       // setTimeout to loadAvailablePlatforms with delay
-      setTimeout(() => {
-        this.loadAvailablePlatforms();
-        console.log(this.availablePlatforms);
-      }, 1000);
+      //setTimeout(() => {
+      //  this.loadAvailablePlatforms();
+      //  console.log(this.availablePlatforms);
+      //}, 1000);
       console.log(this.availablePlatforms);
     });
   }
@@ -146,6 +147,20 @@ export class ResourceDetailsComponent implements OnInit {
 
   navigateBack(): void {
     this.router.navigate(['/resources']);
+  }
+
+  // to set status color into resources table
+  getResourceStatusClass(status: string): string {
+    switch (status) {
+      case 'AVAILABLE':
+        return 'available';
+      case 'NOTAVAILABLE':
+        return 'notAvailable';
+      case 'ASSIGNED':
+        return 'assigned';
+      default:
+        return '';
+    }
   }
 
   ngOnDestroy():void {

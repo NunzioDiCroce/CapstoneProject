@@ -96,7 +96,26 @@
   width: 180px;
 }
 
-
+.assignBtn, .removeBtn, .changeStatusBtn {
+  width: 180px;
+  //background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 230, 0);
+  //border-color:rgb(0, 0, 0);
+  border-color:rgb(255, 230, 0);
+  //color: rgb(255, 230, 0);
+  color: rgb(0, 0, 0);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.assignBtn:hover, .removeBtn:hover, .changeStatusBtn:hover {
+  //background-color: rgb(255, 230, 0);
+  background-color: rgb(0, 0, 0);
+  //border-color:rgb(255, 230, 0);
+  border-color:rgb(0, 0, 0);
+  //color: rgb(0, 0, 0);
+  color: rgb(255, 230, 0);
+}
 
 // resources
 .resourceRowTable {
@@ -109,14 +128,16 @@
 
 .available {
   color: green;
-  //font-weight: bold;
 }
 .notAvailable {
   color: red;
-  //font-weight: bold;
 }
 .assigned {
   color: black;
-  //font-weight: bold;
+}
+
+// resource details
+.labelNoWrap {
+  white-space: nowrap;
 }
 
