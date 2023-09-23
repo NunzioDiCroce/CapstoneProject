@@ -135,18 +135,26 @@ export class ResourceDetailsComponent implements OnInit {
       return;
     }
     const resourceId = this.resourceDetails.id;
-    this.resourcesSrv.deleteResource(resourceId).subscribe(
-      () => {
-        this.router.navigate(['/resources']);
-      },
-      (error) => {
-        console.error('Error deleting resource:', error);
-      }
-    );
+    const confirmation = window.confirm('Are you sure you want to delete the resource?');
+    if (confirmation) {
+      this.resourcesSrv.deleteResource(resourceId).subscribe(
+        () => {
+          alert('Resource deleted!');
+          this.router.navigate(['/resources']);
+        },
+        (error) => {
+          console.error('Error deleting resource:', error);
+        }
+      );
+    }
   }
 
   navigateBack(): void {
     this.router.navigate(['/resources']);
+    //const confirmation = window.confirm('Are you sure you want to close the current operation?');
+    //if (confirmation) {
+    //  this.router.navigate(['/resources']);
+    //}
   }
 
   // to set status color into resources table
