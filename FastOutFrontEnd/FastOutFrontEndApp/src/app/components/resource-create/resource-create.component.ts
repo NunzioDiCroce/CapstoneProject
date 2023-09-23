@@ -57,7 +57,7 @@ export class ResourceCreateComponent implements OnInit {
 
   onSubmit(form:NgForm): void {
     this.resourcesSrv.createResource(this.resource).subscribe(() => {
-      alert('Resource creation success!');
+      window.alert('Resource creation success!');
       this.router.navigate(['/resources']);
     });
   }

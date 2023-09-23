@@ -75,7 +75,7 @@ export class ResourceDetailsComponent implements OnInit {
           this.resourceDetails = updatedResource;
         },
         (error) => {
-          console.error('Errore durante il cambio di stato della risorsa:', error);
+          console.error('Error changing resource state:', error);
         }
       );
     }
@@ -108,6 +108,8 @@ export class ResourceDetailsComponent implements OnInit {
         if (result) {
           //this.loadResourceDetails(this.resourceDetails.id); // TO CHECK because of "Object is possibly 'null'."
           this.loadAvailablePlatforms();
+          window.alert('Successful resource allocation!');
+          this.router.navigate(['/resources']);
         }
       });
     }
@@ -125,6 +127,8 @@ export class ResourceDetailsComponent implements OnInit {
         if (result) {
           //this.loadResourceDetails(this.resourceDetails.id); // TO CHECK because of "Object is possibly 'null'."
           this.loadAvailablePlatforms();
+          window.alert('Successful platform removal!');
+          this.router.navigate(['/resources']);
         }
       });
     }
