@@ -20,16 +20,15 @@
           </tr>
         </thead>
         <tbody class="col-12">
-            <tr *ngFor="let resource of resources; let i = index" (click)="navigateToResourceDetails(resource.id)"
-            class="resourceRowTable">
-              <th scope="row">{{ currentRowNumber + i }}</th>
-              <td>{{ resource.resourceType }}</td>
-              <td>€ {{ resource.resourceCost }}</td>
-              <td [ngClass]="getResourceStatusClass(resource.resourceStatus)">{{ resource.resourceStatus }}</td>
-              <!-- to access 'platformName' property which may be null -->
-              <td *ngIf="resource.platform">{{ resource.platform.platformName }}</td>
-              <td *ngIf="!resource.platform"></td>
-            </tr>
+          <tr *ngFor="let resource of resources; let i = index" (click)="navigateToResourceDetails(resource.id)"class="rowTable">
+            <th scope="row">{{ currentRowNumber + i }}</th>
+            <td>{{ resource.resourceType }}</td>
+            <td>€ {{ resource.resourceCost }}</td>
+            <td [ngClass]="getResourceStatusClass(resource.resourceStatus)">{{ resource.resourceStatus }}</td>
+            <!-- to access 'platformName' property which may be null -->
+            <td *ngIf="resource.platform">{{ resource.platform.platformName }}</td>
+            <td *ngIf="!resource.platform"></td>
+          </tr>
         </tbody>
       </table>
   </div>

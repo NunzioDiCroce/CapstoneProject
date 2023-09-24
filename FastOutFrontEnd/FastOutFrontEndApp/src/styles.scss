@@ -117,12 +117,12 @@
   color: rgb(255, 230, 0);
 }
 
-// resources
-.resourceRowTable {
+// resources, equipments
+.rowTable {
   cursor: pointer;
   transition: background-color 0.3s;
 }
-.resourceRowTable:hover {
+.rowTable:hover {
   background-color: rgb(255, 230, 0);
 }
 
@@ -136,7 +136,7 @@
   color: black;
 }
 
-// resource details
+// resource details, equipment details
 .labelNoWrap {
   white-space: nowrap;
 }
