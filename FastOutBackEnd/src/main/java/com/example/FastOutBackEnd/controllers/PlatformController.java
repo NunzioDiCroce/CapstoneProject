@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.FastOutBackEnd.entities.Equipment;
 import com.example.FastOutBackEnd.entities.Platform;
 import com.example.FastOutBackEnd.entities.Resource;
 import com.example.FastOutBackEnd.payloads.UpdatePlatformPayload;
@@ -85,6 +86,14 @@ public class PlatformController {
 	public List<Resource> getResourcesForPlatform(@PathVariable UUID platformId) {    
 	    Platform platform = platformService.getPlatformByID(platformId);
 	    return platform.getResources();
+	}
+	
+	
+	// get equipments associated with the platform
+	@GetMapping("/{platformId}/equipments")
+	public List<Equipment> getEquipmentsForPlatform(@PathVariable UUID platformId) {
+		Platform platform = platformService.getPlatformByID(platformId);
+		return platform.getEquipments();
 	}
 
 
