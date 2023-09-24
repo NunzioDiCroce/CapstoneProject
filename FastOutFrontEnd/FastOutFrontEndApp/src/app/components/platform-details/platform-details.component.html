@@ -1,48 +1,71 @@
 <div class="container">
   <div class="row" *ngIf="platformDetails">
-    <h4 class="mb-3">{{ platformDetails.platformName }}</h4>
+    <h4 class="mb-3 mt-3">{{ platformDetails.platformName }}</h4>
 
     <div class="card mb-3">
       <div class="card-body">
-        <p class="card-text">location: {{ platformDetails.location }}</p>
-        <p class="card-text">customerType: {{ platformDetails.customerType }}</p>
-        <p class="card-text">parcelsPerMonth: {{ platformDetails.parcelsPerMonth }}</p>
-        <p class="card-text">parcelRate: {{ platformDetails.parcelRate }}</p>
-        <p class="card-text">revenuesPerMonth: {{ platformDetails.revenuesPerMonth }}</p>
-        <p class="card-text">totalCostsPerMonth: {{ platformDetails.totalCostsPerMonth }}</p>
-        <p class="card-text">marginPerMonth: {{ platformDetails.marginPerMonth }}</p>
-        <p class="card-text">productivity: {{ platformDetails.productivity }}</p>
+        <p class="card-text"><strong>Location:</strong> {{ platformDetails.location }}</p>
+        <p class="card-text"><strong>Customer type:</strong> {{ platformDetails.customerType }}</p>
+        <p class="card-text"><strong>Parcels per month:</strong> {{ platformDetails.parcelsPerMonth }}</p>
+        <p class="card-text"><strong>Parcel rate:</strong> € {{ platformDetails.parcelRate }}</p>
+        <p class="card-text"><strong>Revenues per month:</strong> € {{ platformDetails.revenuesPerMonth }}</p>
+        <p class="card-text"><strong>Total costs per month:</strong> € {{ platformDetails.totalCostsPerMonth }}</p>
+        <p class="card-text"><strong>Margin per month:</strong> € {{ platformDetails.marginPerMonth }}</p>
+        <p class="card-text"><strong>Productivity:</strong> {{ platformDetails.productivity }} Parcels/Hour</p>
       </div>
     </div>
 
     <div class="card mb-3">
       <div class="card-body">
-        <button class="btn btn-warning" (click)="deletePlatform()">Cancella la piattaforma</button>
+        <button class="btn btn-danger cancelBtn me-3" (click)="deletePlatform()">Delete platform</button>
+        <button type="button" class="btn btn-secondary cancelBtn me-3" (click)="navigateBack()">Close</button>
       </div>
     </div>
-
-    <button type="button" class="btn btn-secondary" (click)="navigateBack()">Back</button>
 
     <!-- resourcesForPlatform table -->
     <div class="card mb-3">
       <div class="card-body">
-        <h5 class="card-title">Risorse associate</h5>
+        <h5 class="card-title">Platform Resources</h5>
         <table class="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>resourceType</th>
-              <th>resourceCost</th>
-              <th>hoursPerMonth</th>
+              <th>#</th>
+              <th>Type</th>
+              <th>Monthly cost</th>
+              <th>Hours per month</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let resource of resourcesForPlatform">
-              <td>{{ resource }}</td>
+              <td>1</td>
               <td>{{ resource.resourceType }}</td>
-              <td>{{ resource.resourceCost }}</td>
+              <td>€ {{ resource.resourceCost }}</td>
               <td>{{ resource.hoursPerMonth }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
+    <!-- equipmentsForPlatform table -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Platform Equipments</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Type</th>
+              <th>Monthly cost</th>
+              <th>Serial number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let equipment of equipmentsForPlatform">
+              <td>1</td>
+              <td>{{ equipment.equipmentType }}</td>
+              <td>€ {{ equipment.equipmentCost }}</td>
+              <td>{{ equipment.serialNumber }}</td>
             </tr>
           </tbody>
         </table>
