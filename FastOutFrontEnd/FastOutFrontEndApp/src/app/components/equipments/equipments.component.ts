@@ -86,6 +86,24 @@ export class EquipmentsComponent implements OnInit {
     this.router.navigate(['/createEquipment']);
   }
 
+  navigateToEquipmentDetails(equipmentId: string): void {
+    this.router.navigate(['/equipments', equipmentId]);
+  }
+
+  // to set status color into resources table
+  getEquipmentStatusClass(status: string): string {
+    switch (status) {
+      case 'AVAILABLE':
+        return 'available';
+      case 'NOTAVAILABLE':
+        return 'notAvailable';
+      case 'ASSIGNED':
+        return 'assigned';
+      default:
+        return '';
+    }
+  }
+
   ngOnDestroy():void {
     if(this.sub) {
       this.sub.unsubscribe()
