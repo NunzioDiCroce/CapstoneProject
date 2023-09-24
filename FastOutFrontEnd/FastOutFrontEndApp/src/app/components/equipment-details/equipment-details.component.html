@@ -4,7 +4,7 @@
 
     <div class="card mb-3">
       <div class="card-body">
-        <p class="card-text"><strong>Equipment cost:</strong> € {{ equipmentDetails.equipmentCost }}</p>
+        <p class="card-text"><strong>Monthly cost:</strong> € {{ equipmentDetails.equipmentCost }}</p>
         <p class="card-text"><strong>Serial number:</strong> {{ equipmentDetails.serialNumber }}</p>
         <p class="card-text"><strong>Equipment status:</strong><span [ngClass]="getEquipmentStatusClass(equipmentDetails.equipmentStatus)"> {{ equipmentDetails.equipmentStatus }}</span></p>
         <p class="card-text"><!-- to access 'platformName' property which may be null -->

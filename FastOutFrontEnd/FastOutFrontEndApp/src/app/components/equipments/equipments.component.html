@@ -5,32 +5,32 @@
       <h4 class="mb-3 mt-3">Equipments</h4>
     </div>
     <div class="col-sm-4 d-flex justify-content-end align-items-center">
-      <button class="btn btn-success createBtn" (click)="createEquipment()">Create Equipment</button>
+      <button class="btn btn-success createBtn" (click)="createEquipment()">Create equipment</button>
     </div>
 
-      <table class="table caption-top">
-        <!--<caption>Table caption</caption>-->
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Type</th>
-            <th scope="col">Monthly cost</th>
-            <th scope="col">Status</th>
-            <th scope="col">Platform</th>
-          </tr>
-        </thead>
-        <tbody class="col-12">
-          <tr *ngFor="let equipment of equipments; let i = index" (click)="navigateToEquipmentDetails(equipment.id)"class="rowTable">
-            <th scope="row">{{ currentRowNumber + i }}</th>
-            <td>{{ equipment.equipmentType }}</td>
-            <td>€ {{ equipment.equipmentCost }}</td>
-            <td [ngClass]="getEquipmentStatusClass(equipment.equipmentStatus)">{{ equipment.equipmentStatus }}</td>
-            <!-- to access 'platformName' property which may be null -->
-            <td *ngIf="equipment.platform">{{ equipment.platform.platformName }}</td>
-            <td *ngIf="!equipment.platform"></td>
-          </tr>
-        </tbody>
-      </table>
+    <table class="table caption-top">
+      <!--<caption>Table caption</caption>-->
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Type</th>
+          <th scope="col">Monthly cost</th>
+          <th scope="col">Status</th>
+          <th scope="col">Platform</th>
+        </tr>
+      </thead>
+      <tbody class="col-12">
+        <tr *ngFor="let equipment of equipments; let i = index" (click)="navigateToEquipmentDetails(equipment.id)"class="rowTable">
+          <th scope="row">{{ currentRowNumber + i }}</th>
+          <td>{{ equipment.equipmentType }}</td>
+          <td>€ {{ equipment.equipmentCost }}</td>
+          <td [ngClass]="getEquipmentStatusClass(equipment.equipmentStatus)">{{ equipment.equipmentStatus }}</td>
+          <!-- to access 'platformName' property which may be null -->
+          <td *ngIf="equipment.platform">{{ equipment.platform.platformName }}</td>
+          <td *ngIf="!equipment.platform"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- Pagination -->
