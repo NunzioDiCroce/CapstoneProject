@@ -32,7 +32,7 @@ export class PlatformCreateComponent implements OnInit {
     parcelRate: 0.0,
   };
 
-  constructor( private platformsSrv:PlatformsService, private authSrv:AuthService, private router: Router ) { }
+  constructor( private platformsSrv: PlatformsService, private authSrv: AuthService, private router: Router ) { }
 
   ngOnInit(): void {
     this.authSrv.user$.subscribe((_user) => {
@@ -43,14 +43,24 @@ export class PlatformCreateComponent implements OnInit {
 
   onSubmit(form:NgForm): void {
     this.platformsSrv.createPlatform(this.platform).subscribe(() => {
-      alert('Platform creation success!');
+      window.alert('Platform creation success!');
       this.router.navigate(['/platforms']);
     });
   }
 
   cancelCreation(): void {
-    alert('Platform creation cancelled!');
-    this.router.navigate(['/platforms']);
+    const confirmation = window.confirm('Are you sure you want to cancel the current operation?');
+    if (confirmation) {
+      this.router.navigate(['/platforms']);
+    }
   }
+
+  ngOnDestroy():void {
+    if(this.sub) {
+      this.sub.unsubscribe()
+    }
+  }
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 }

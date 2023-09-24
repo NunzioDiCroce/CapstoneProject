@@ -40,7 +40,7 @@ export class ResourceCreateComponent implements OnInit {
     OPERATOR: 2600
   }
 
-  constructor( private resourcesSrv:ResourcesService, private authSrv:AuthService, private router: Router ) { }
+  constructor( private resourcesSrv: ResourcesService, private authSrv: AuthService, private router: Router ) { }
 
   ngOnInit(): void {
     this.authSrv.user$.subscribe((_user) => {
