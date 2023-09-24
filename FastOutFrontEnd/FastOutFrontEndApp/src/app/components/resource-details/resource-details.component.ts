@@ -34,7 +34,7 @@ export class ResourceDetailsComponent implements OnInit {
 
   dataLoaded = false; // boolean to track data loading for loadAvailablePlatforms
 
-  constructor( private resourcesSrv:ResourcesService, private authSrv:AuthService, private router: Router, private route: ActivatedRoute ) { }
+  constructor( private resourcesSrv: ResourcesService, private authSrv: AuthService, private router: Router, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
     this.authSrv.user$.subscribe((_user) => {
@@ -46,13 +46,7 @@ export class ResourceDetailsComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const resourceId = params.get('id')!;
       this.loadResourceDetails(resourceId);
-
       this.loadAvailablePlatforms();
-      // setTimeout to loadAvailablePlatforms with delay
-      //setTimeout(() => {
-      //  this.loadAvailablePlatforms();
-      //  console.log(this.availablePlatforms);
-      //}, 1000);
       console.log(this.availablePlatforms);
     });
   }
@@ -88,7 +82,6 @@ export class ResourceDetailsComponent implements OnInit {
         this.availablePlatforms = platforms;
         this.dataLoaded = true; // boolean to track data loading for loadAvailablePlatforms
       }
-      //this.dataLoaded = true; // boolean to track data loading for loadAvailablePlatforms
       console.log(this.dataLoaded);
       console.log(typeof platforms);
       //console.log(typeof platforms.content);
@@ -106,7 +99,6 @@ export class ResourceDetailsComponent implements OnInit {
       this.resourcesSrv.assignResource(this.resourceDetails.id, assignPayload).subscribe((result: any) => {
         this.assigningResource = false;
         if (result) {
-          //this.loadResourceDetails(this.resourceDetails.id); // TO CHECK because of "Object is possibly 'null'."
           this.loadAvailablePlatforms();
           window.alert('Successful resource allocation!');
           this.router.navigate(['/resources']);
@@ -125,7 +117,6 @@ export class ResourceDetailsComponent implements OnInit {
       this.resourcesSrv.removeResource(this.resourceDetails.id, removePayload).subscribe((result: any) => {
         this.assigningResource = false;
         if (result) {
-          //this.loadResourceDetails(this.resourceDetails.id); // TO CHECK because of "Object is possibly 'null'."
           this.loadAvailablePlatforms();
           window.alert('Successful platform removal!');
           this.router.navigate(['/resources']);
@@ -155,10 +146,6 @@ export class ResourceDetailsComponent implements OnInit {
 
   navigateBack(): void {
     this.router.navigate(['/resources']);
-    //const confirmation = window.confirm('Are you sure you want to close the current operation?');
-    //if (confirmation) {
-    //  this.router.navigate(['/resources']);
-    //}
   }
 
   // to set status color into resources table
@@ -175,7 +162,7 @@ export class ResourceDetailsComponent implements OnInit {
     }
   }
 
-  ngOnDestroy():void {
+  ngOnDestroy(): void {
     if(this.sub) {
       this.sub.unsubscribe()
     }
