@@ -25,7 +25,7 @@ export class PlatformsComponent implements OnInit {
   // pagination
   currentPage = 0;
   currentPageIndex = 0;
-  pageSize = 1;
+  pageSize = 10;
   sortBy = 'id';
   totalPages = 0;
   totalPagesArray: number[] = [];

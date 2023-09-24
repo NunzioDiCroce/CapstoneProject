@@ -17,7 +17,7 @@ export class ResourcesService {
 
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  constructor( private http:HttpClient, private router: Router ) { }
+  constructor( private http: HttpClient, private router: Router ) { }
 
 
   getResources(page: number, size: number, sortBy: string) {

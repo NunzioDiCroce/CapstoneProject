@@ -8,6 +8,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Resource } from '../models/resource.interface';
+import { Equipment } from '../models/equipment.interface';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 @Injectable({
@@ -17,7 +18,7 @@ export class PlatformsService {
 
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  constructor( private http:HttpClient, private router: Router ) { }
+  constructor( private http: HttpClient, private router: Router ) { }
 
 
   getPlatforms(page: number, size: number, sortBy: string) {
@@ -57,10 +58,8 @@ export class PlatformsService {
       this.router.navigate(['/login']);
       return of(null); // to return an empty observable
     }
-
     const user = JSON.parse(userString);
     const token = user.accessToken;
-
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
@@ -100,6 +99,23 @@ export class PlatformsService {
     });
 
     return this.http.get<any>(`http://localhost:3001/platforms/${platformId}/resources`, { headers });
+  }
+
+
+  getEquipmentsForPlatform(platformId: string): Observable<any>  {
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null); // to return an empty observable
+    }
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(`http://localhost:3001/platforms/${platformId}/equipments`, { headers });
   }
 
 
