@@ -56,9 +56,9 @@ public class EquipmentService {
 	public Equipment updateEquipment(UUID id, UpdateEquipmentPayload body) {
 		Equipment found = getEquipmentByID(id);
 					
-		found.setEquipmentType(body.getEquipmentType());
-		found.setEquipmentCost(body.getEquipmentCost());
-		found.setSerialNumber(body.getSerialNumber());
+		//found.setEquipmentType(body.getEquipmentType()); // commented to update only resourceStatus
+		//found.setEquipmentCost(body.getEquipmentCost()); // commented to update only resourceStatus
+		//found.setSerialNumber(body.getSerialNumber()); // commented to update only resourceStatus
 		found.setEquipmentStatus(body.getEquipmentStatus());
 
 		return equipmentRepository.save(found);

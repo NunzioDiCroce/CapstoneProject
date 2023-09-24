@@ -18,11 +18,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateEquipmentPayload {
 	
-	@Enumerated(EnumType.STRING)
-	private EquipmentType equipmentType;
+	//@Enumerated(EnumType.STRING)
+	//private EquipmentType equipmentType;
 	
-	private BigDecimal equipmentCost;	
-	private String serialNumber;
+	//private BigDecimal equipmentCost;	
+	//private String serialNumber;
 	
 	@Enumerated(EnumType.STRING)
 	private EquipmentStatus equipmentStatus;
