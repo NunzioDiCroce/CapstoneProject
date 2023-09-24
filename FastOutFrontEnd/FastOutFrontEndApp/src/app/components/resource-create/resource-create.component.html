@@ -6,7 +6,7 @@
       <form #form="ngForm" (ngSubmit)="onSubmit(form)">
         <div class="form-group mb-3">
           <label for="resourceType">Resource type</label>
-          <select class="form-control" id="resourceType" [(ngModel)]="resource.resourceType" (ngModelChange)="onResourceTypeChange()" name="resourceType" required>
+          <select class="form-control pointerOnSelect" id="resourceType" [(ngModel)]="resource.resourceType" (ngModelChange)="onResourceTypeChange()" name="resourceType" required>
             <option value="SITEMANAGER">SITEMANAGER</option>
             <option value="FORKLIFTDRIVER">FORKLIFTDRIVER</option>
             <option value="PICKER">PICKER</option>
@@ -27,7 +27,7 @@
 
         <div class="form-group mb-3">
           <label for="resourceStatus">Resource status</label>
-          <select class="form-control" id="resourceStatus" [(ngModel)]="resource.resourceStatus" name="resourceStatus" required>
+          <select class="form-control pointerOnSelect" id="resourceStatus" [(ngModel)]="resource.resourceStatus" name="resourceStatus" required>
             <option value="AVAILABLE">AVAILABLE</option>
             <option value="NOTAVAILABLE">NOT AVAILABLE</option>
           </select>
