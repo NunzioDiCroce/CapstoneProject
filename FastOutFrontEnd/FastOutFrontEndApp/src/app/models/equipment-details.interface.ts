@@ -1,4 +1,4 @@
-export interface Equipment {
+export interface EquipmentDetails {
 
   id: string,
   equipmentType: string,
