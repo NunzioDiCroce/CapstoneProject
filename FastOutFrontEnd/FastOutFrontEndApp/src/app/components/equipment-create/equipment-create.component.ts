@@ -31,7 +31,7 @@ export class EquipmentCreateComponent implements OnInit {
     equipmentStatus: ''
   };
 
-  // to have resourceCost based on resourceType dynamically in the form
+  // to have equipmentCost based on equipmentType dynamically in the form
   equipmentCosts: { [key: string]: number } = {
     BARCODEREADER: 1000,
     FORKLIFT: 3000,
@@ -61,9 +61,18 @@ export class EquipmentCreateComponent implements OnInit {
   }
 
   cancelCreation(): void {
-    alert('Equipment creation cancelled!');
-    this.router.navigate(['/equipments']);
+    const confirmation = window.confirm('Are you sure you want to cancel the current operation?');
+    if (confirmation) {
+      this.router.navigate(['/equipments']);
+    }
   }
+
+  ngOnDestroy():void {
+    if(this.sub) {
+      this.sub.unsubscribe()
+    }
+  }
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 }
