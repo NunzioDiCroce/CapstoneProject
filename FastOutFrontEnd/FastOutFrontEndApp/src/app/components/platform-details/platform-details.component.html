@@ -1,16 +1,18 @@
 <div class="container">
   <div class="row" *ngIf="platformDetails">
-    <h4 class="mb-3 mt-3">{{ platformDetails.platformName }}</h4>
-
+    <h4 class="mb-3 mt-3"><strong>{{ platformDetails.platformName }}</strong></h4>
     <div class="card mb-3">
       <div class="card-body">
         <p class="card-text"><strong>Location:</strong> {{ platformDetails.location }}</p>
         <p class="card-text"><strong>Customer type:</strong> {{ platformDetails.customerType }}</p>
         <p class="card-text"><strong>Parcels per month:</strong> {{ platformDetails.parcelsPerMonth }}</p>
+        <hr>
         <p class="card-text"><strong>Parcel rate:</strong> € {{ platformDetails.parcelRate }}</p>
         <p class="card-text"><strong>Revenues per month:</strong> € {{ platformDetails.revenuesPerMonth }}</p>
         <p class="card-text"><strong>Total costs per month:</strong> € {{ platformDetails.totalCostsPerMonth }}</p>
         <p class="card-text"><strong>Margin per month:</strong> € {{ platformDetails.marginPerMonth }}</p>
+        <hr>
+        <p class="card-text"><strong>Total hours per month:</strong> {{ platformDetails.hoursPerMonth }}</p>
         <p class="card-text"><strong>Productivity:</strong> {{ platformDetails.productivity }} Parcels/Hour</p>
       </div>
     </div>
@@ -36,8 +38,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let resource of resourcesForPlatform">
-              <td>1</td>
+            <tr *ngFor="let resource of resourcesForPlatform; let i = index">
+              <td>{{ resourcesRowNumber + i }}</td>
               <td>{{ resource.resourceType }}</td>
               <td>€ {{ resource.resourceCost }}</td>
               <td>{{ resource.hoursPerMonth }}</td>
@@ -61,8 +63,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let equipment of equipmentsForPlatform">
-              <td>1</td>
+            <tr *ngFor="let equipment of equipmentsForPlatform; let i = index">
+              <td>{{ equipmentsRowNumber + i }}</td>
               <td>{{ equipment.equipmentType }}</td>
               <td>€ {{ equipment.equipmentCost }}</td>
               <td>{{ equipment.serialNumber }}</td>

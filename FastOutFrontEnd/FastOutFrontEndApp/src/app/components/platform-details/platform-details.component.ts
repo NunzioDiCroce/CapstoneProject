@@ -31,6 +31,10 @@ export class PlatformDetailsComponent implements OnInit {
   resourcesForPlatform: Resource[] = [];
   equipmentsForPlatform: Equipment[] = [];
 
+  // table row number
+  resourcesRowNumber: number = 1;
+  equipmentsRowNumber: number = 1;
+
   constructor( private platformsSrv: PlatformsService, private authSrv: AuthService, private router: Router, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
