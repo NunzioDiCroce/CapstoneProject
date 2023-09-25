@@ -110,20 +110,20 @@ public class PlatformService {
 		Platform found = getPlatformByID(id);
 		
 		// check if platformName is not null and doesn't already exist
-	    if (body.getPlatformName() != null && !body.getPlatformName().equals(found.getPlatformName()) &&
-	        platformRepository.findByPlatformName(body.getPlatformName()).isPresent()) {
-	        throw new IllegalArgumentException("Platform name must be unique and not null.");
-	    }
+//	    if (body.getPlatformName() != null && !body.getPlatformName().equals(found.getPlatformName()) &&
+//	        platformRepository.findByPlatformName(body.getPlatformName()).isPresent()) {
+//	        throw new IllegalArgumentException("Platform name must be unique and not null.");
+//	    }
 		
-		found.setLocation(body.getLocation());
-		found.setCustomerType(body.getCustomerType());
+//		found.setLocation(body.getLocation()); // commented to update only parcelsPerMonth and parcelRate
+//		found.setCustomerType(body.getCustomerType()); // commented to update only parcelsPerMonth and parcelRate
 		found.setParcelsPerMonth(body.getParcelsPerMonth());
 		found.setParcelRate(body.getParcelRate());
 		
 		// check if platformName is not null
-	    if (body.getPlatformName() != null) {
-	        found.setPlatformName(body.getPlatformName());
-	    }
+//	    if (body.getPlatformName() != null) {
+//	        found.setPlatformName(body.getPlatformName());
+//	    }
 		
 		// revenuesPerMonth calculation
 		BigDecimal parcelsPerMonth = body.getParcelsPerMonth();
