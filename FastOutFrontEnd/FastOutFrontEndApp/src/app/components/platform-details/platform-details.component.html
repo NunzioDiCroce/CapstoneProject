@@ -10,7 +10,8 @@
         <p class="card-text"><strong>Parcel rate:</strong> € {{ platformDetails.parcelRate }}</p>
         <p class="card-text"><strong>Revenues per month:</strong> € {{ platformDetails.revenuesPerMonth }}</p>
         <p class="card-text"><strong>Total costs per month:</strong> € {{ platformDetails.totalCostsPerMonth }}</p>
-        <p class="card-text"><strong>Margin per month:</strong> € {{ platformDetails.marginPerMonth }}</p>
+        <p class="card-text" [ngClass]="{'text-success': platformDetails.marginPerMonth > 0, 'text-danger': platformDetails.marginPerMonth < 0}">
+          <strong>Margin per month:</strong> € {{ platformDetails.marginPerMonth }}</p>
         <hr>
         <p class="card-text"><strong>Total hours per month:</strong> {{ platformDetails.hoursPerMonth }}</p>
         <p class="card-text"><strong>Productivity:</strong> {{ platformDetails.productivity }} Parcels/Hour</p>
