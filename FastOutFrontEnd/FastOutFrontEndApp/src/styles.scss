@@ -96,7 +96,7 @@
   width: 180px;
 }
 
-.assignBtn, .removeBtn, .changeStatusBtn, .platformDetailsBtn {
+.assignBtn, .removeBtn, .changeStatusBtn, .platformDetailsBtn, .updateDetailsBtn{
   width: 180px;
   background-color: rgb(0, 0, 0);
   //background-color: rgb(255, 230, 0);
@@ -108,7 +108,7 @@
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
-.assignBtn:hover, .removeBtn:hover, .changeStatusBtn:hover, .platformDetailsBtn:hover {
+.assignBtn:hover, .removeBtn:hover, .changeStatusBtn:hover, .platformDetailsBtn:hover, .updateDetailsBtn:hover {
   background-color: rgb(255, 230, 0);
   //background-color: rgb(0, 0, 0);
   border-color:rgb(255, 230, 0);

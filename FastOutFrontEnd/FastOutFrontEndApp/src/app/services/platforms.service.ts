@@ -134,6 +134,28 @@ export class PlatformsService {
 
     return this.http.delete<any>(`http://localhost:3001/platforms/${platformId}`, { headers });
   }
+
+
+  updatePlatformDetails(platformId: string, newParcelsPerMonth: number, newParcelRate: number): Observable<any> {
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      this.router.navigate(['/login']);
+      return of(null); // to return an empty observable
+    }
+    const user = JSON.parse(userString);
+    const token = user.accessToken;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    const body = {
+      parcelsPerMonth: newParcelsPerMonth,
+      parcelRate: newParcelRate
+    };
+
+    return this.http.put<any>(`http://localhost:3001/platforms/${platformId}`, body, {headers});
+  }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 

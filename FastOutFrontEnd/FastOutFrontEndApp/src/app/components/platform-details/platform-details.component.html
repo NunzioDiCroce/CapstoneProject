@@ -5,9 +5,20 @@
       <div class="card-body">
         <p class="card-text"><strong>Location:</strong> {{ platformDetails.location }}</p>
         <p class="card-text"><strong>Customer type:</strong> {{ platformDetails.customerType }}</p>
-        <p class="card-text"><strong>Parcels per month:</strong> {{ platformDetails.parcelsPerMonth }}</p>
+
+        <!-- Form-group with [(ngModel)]="updatedParcelsPerMonth" to implement the correct binding between the model input fields and the component variables (the changes are reflected in the component variables). -->
+        <div class="form-group">
+          <label for="parcelsPerMonth"><strong>Parcels per month:</strong></label>
+          <input type="number" step="0.01" class="form-control" id="parcelsPerMonth" [(ngModel)]="updatedParcelsPerMonth" name="parcelsPerMonth">
+        </div>
+
+        <!-- Form-group with [(ngModel)]="updatedParcelRate" to implement the correct binding between the model input fields and the component variables (the changes are reflected in the component variables). -->
+        <div class="form-group">
+          <label for="parcelRate"><strong>Parcel rate:</strong></label>
+          <input type="number" step="0.01" class="form-control" id="parcelRate" [(ngModel)]="updatedParcelRate" name="parcelRate">
+        </div>
+
         <hr>
-        <p class="card-text"><strong>Parcel rate:</strong> € {{ platformDetails.parcelRate }}</p>
         <p class="card-text"><strong>Revenues per month:</strong> € {{ platformDetails.revenuesPerMonth }}</p>
         <p class="card-text"><strong>Total costs per month:</strong> € {{ platformDetails.totalCostsPerMonth }}</p>
         <p class="card-text" [ngClass]="{'text-success': platformDetails.marginPerMonth > 0, 'text-danger': platformDetails.marginPerMonth < 0}">
@@ -20,6 +31,7 @@
 
     <div class="card mb-3">
       <div class="card-body">
+        <button class="btn btn-primary updateDetailsBtn me-3" (click)="updatePlatformDetails()">Save changes</button>
         <button class="btn btn-danger cancelBtn me-3" (click)="deletePlatform()">Delete platform</button>
         <button type="button" class="btn btn-secondary cancelBtn me-3" (click)="navigateBack()">Close</button>
       </div>

@@ -35,6 +35,10 @@ export class PlatformDetailsComponent implements OnInit {
   resourcesRowNumber: number = 1;
   equipmentsRowNumber: number = 1;
 
+  // to update platform details
+  updatedParcelsPerMonth: number = 0;
+  updatedParcelRate: number = 0;
+
   constructor( private platformsSrv: PlatformsService, private authSrv: AuthService, private router: Router, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
@@ -53,6 +57,10 @@ export class PlatformDetailsComponent implements OnInit {
   loadPlatformDetails(platformId: string): void {
     this.sub = this.platformsSrv.getPlatformDetails(platformId).subscribe((details: PlatformDetails) => {
       this.platformDetails = details;
+
+      this.updatedParcelsPerMonth = details.parcelsPerMonth; // !
+      this.updatedParcelRate = details.parcelRate; // !
+
       this.loadResourcesForPlatform(platformId);
       this.loadEquipmentsForPlatform(platformId)
     });
@@ -92,6 +100,44 @@ export class PlatformDetailsComponent implements OnInit {
 
   navigateBack(): void {
     this.router.navigate(['/platforms']);
+  }
+
+  updatePlatformDetails(): void {
+    console.log('updatePlatformDetails called');
+    if (!this.platformDetails || !this.platformDetails.id) {
+      console.log('Invalid platform details');
+      return;
+    }
+    console.log('Updating with:', this.updatedParcelsPerMonth, this.updatedParcelRate);
+    if (
+      this.updatedParcelsPerMonth !== this.platformDetails.parcelsPerMonth ||
+      this.updatedParcelRate !== this.platformDetails.parcelRate
+    ) {
+      console.log('Changes detected, updating...');
+      this.platformsSrv
+        .updatePlatformDetails(
+          this.platformDetails.id,
+          this.updatedParcelsPerMonth,
+          this.updatedParcelRate
+        )
+        .subscribe({
+          next: () => {
+            console.log('Update successful');
+            if (this.platformDetails) {
+              this.platformDetails.parcelsPerMonth = this.updatedParcelsPerMonth;
+              this.platformDetails.parcelRate = this.updatedParcelRate;
+            }
+            this.updatedParcelsPerMonth = 0;
+            this.updatedParcelRate = 0;
+            window.location.reload();
+          },
+          error: (error) => {
+            console.error('Error updating platform details', error);
+          },
+        });
+    } else {
+      console.log('No changes to update');
+    }
   }
 
   ngOnDestroy():void {
