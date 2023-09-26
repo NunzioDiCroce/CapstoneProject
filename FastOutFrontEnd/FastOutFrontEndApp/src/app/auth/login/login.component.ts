@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       this.authSrv.login(form.value).subscribe(
         () => {
           this.isLoading = false;
-          alert('Login success!');
+          //alert('Login success!');
           this.router.navigate(['/'])
         },
         (error:any) => {

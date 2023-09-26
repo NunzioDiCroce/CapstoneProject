@@ -1,18 +1,17 @@
 <div class="container homeTemplate">
 
   <div *ngIf="!user else myHome">
-    <div class="row mt-5">
-      <div class="col-12">
-        <p>The definitive solution for managing your logistics platforms.</p>
+    <div class="row">
+      <div class="col-lg-9 col-md-12">
+        <p class="fs-4">The definitive solution for managing your logistics platforms.</p>
+        <p class="fs-4">Optimize resources and monitor KPIs in real time.</p>
+        <p class="fs-4"><strong>FastOut</strong>, where efficiency meets logistics.</p>
       </div>
-      <div class="col-12">
-        <p>Optimize resources and monitor KPIs in real time.</p>
-      </div>
-      <div class="col-12">
-        <p><strong>FastOut</strong>, where efficiency meets logistics.</p>
+      <div class="col-lg-3 col-md-12 d-none d-lg-block">
+        <img src="../../../assets/images/homeImage.png" alt="homeImage" class="img-fluid" width="200" height="120">
       </div>
     </div>
-    <div class="row mt-5">
+    <div class="row">
       <div class="col-12">
         <button type="button" class="btn btn-secondary mx-2 homeBtn" (click)="goToLogin()">Login</button>
         <button type="button" class="btn btn-secondary  mx-2 homeBtn" (click)="goToRegister()">Register</button>
@@ -21,21 +20,14 @@
   </div>
 
   <ng-template #myHome>
-    <div class="row mt-5">
-      <div class="col-12">
-        <p>The definitive solution for managing your logistics platforms.</p>
+    <div class="row">
+      <div class="col-lg-9 col-md-12">
+        <p class="fs-4">The definitive solution for managing your logistics platforms.</p>
+        <p class="fs-4">Optimize resources and monitor KPIs in real time.</p>
+        <p class="fs-4"><strong>FastOut</strong>, where efficiency meets logistics.</p>
       </div>
-      <div class="col-12">
-        <p>Optimize resources and monitor KPIs in real time.</p>
-      </div>
-      <div class="col-12">
-        <p><strong>FastOut</strong>, where efficiency meets logistics.</p>
-      </div>
-    </div>
-    <div class="row mt-5">
-      <div class="col-12">
-
-
+      <div class="col-lg-3 col-md-12 d-none d-lg-block">
+        <img src="../../../assets/images/homeImage.png" alt="homeImage" class="img-fluid" width="200" height="120">
       </div>
     </div>
   </ng-template>
