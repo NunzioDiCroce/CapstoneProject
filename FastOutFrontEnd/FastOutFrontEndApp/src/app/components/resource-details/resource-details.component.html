@@ -4,7 +4,7 @@
 
     <div class="card mb-3">
       <div class="card-body">
-        <p class="card-text"><strong>Monthly cost:</strong> € {{ resourceDetails.resourceCost }}</p>
+        <p class="card-text"><strong>Monthly cost:</strong> {{ euroCurrencyFormat(resourceDetails.resourceCost) }}</p>
         <p class="card-text"><strong>Hours per month:</strong> {{ resourceDetails.hoursPerMonth }}</p>
         <p class="card-text"><strong>Resource status:</strong><span [ngClass]="getResourceStatusClass(resourceDetails.resourceStatus)"> {{ resourceDetails.resourceStatus }}</span></p>
         <p class="card-text"><!-- to access 'platformName' property which may be null -->
