@@ -162,6 +162,16 @@ export class EquipmentDetailsComponent implements OnInit {
     }
   }
 
+  // to customize Euro currency format
+  euroCurrencyFormat(value: number): string {
+    const formattedValue = new Intl.NumberFormat('it-IT', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2
+    }).format(value);
+    return formattedValue;
+  }
+
   ngOnDestroy(): void {
     if(this.sub) {
       this.sub.unsubscribe()
