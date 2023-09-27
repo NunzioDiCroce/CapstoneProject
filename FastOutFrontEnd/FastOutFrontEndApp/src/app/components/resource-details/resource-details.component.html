@@ -30,14 +30,14 @@
 
     <div class="card mb-3">
       <div class="card-body">
-        <button class="btn btn-danger removeBtn me-3" *ngIf="resourceDetails.resourceStatus === 'ASSIGNED'" (click)="removeResourceFromPlatform()">Remove platform</button>
+        <button class="btn btn-danger removeBtn me-3 mb-0" *ngIf="resourceDetails.resourceStatus === 'ASSIGNED'" (click)="removeResourceFromPlatform()">Remove platform</button>
 
-        <button class="btn btn-secondary changeStatusBtn me-3" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE'" (click)="changeResourceStatus('NOTAVAILABLE')">Set NOTAVAILABLE</button>
-        <button class="btn btn-secondary changeStatusBtn me-3" *ngIf="resourceDetails.resourceStatus === 'NOTAVAILABLE'" (click)="changeResourceStatus('AVAILABLE')">Set AVAILABLE</button>
+        <button class="btn btn-secondary changeStatusBtn me-3 mb-3 mb-md-0" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE'" (click)="changeResourceStatus('NOTAVAILABLE')">Set NOTAVAILABLE</button>
+        <button class="btn btn-secondary changeStatusBtn me-3 mb-3 mb-md-0" *ngIf="resourceDetails.resourceStatus === 'NOTAVAILABLE'" (click)="changeResourceStatus('AVAILABLE')">Set AVAILABLE</button>
 
-        <button class="btn btn-danger cancelBtn me-3" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE' || resourceDetails.resourceStatus === 'NOTAVAILABLE'" (click)="deleteResource()">Delete resource</button>
+        <button class="btn btn-danger cancelBtn me-3 mb-3 mb-md-0" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE' || resourceDetails.resourceStatus === 'NOTAVAILABLE'" (click)="deleteResource()">Delete resource</button>
 
-        <button type="button" class="btn btn-secondary cancelBtn me-3" (click)="navigateBack()">Close</button>
+        <button type="button" class="btn btn-secondary cancelBtn me-3 mb-0" (click)="navigateBack()">Close</button>
       </div>
     </div>
 
