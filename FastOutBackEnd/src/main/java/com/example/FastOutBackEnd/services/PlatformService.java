@@ -138,6 +138,9 @@ public class PlatformService {
 		
 		// updateMarginPerMonth
 		found.updateMarginPerMonth();
+		
+		// updateProductivity
+		found.updateProductivity();
 
 		return platformRepository.save(found);
 	}
