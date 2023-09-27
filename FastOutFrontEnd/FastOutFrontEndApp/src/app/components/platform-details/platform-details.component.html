@@ -41,7 +41,7 @@
     <div class="card mb-3">
       <div class="card-body">
         <h5 class="card-title">Platform Resources</h5>
-        <table class="table">
+        <table class="table" *ngIf="resourcesForPlatform.length !== 0 else noResourcesForPlatform">
           <thead>
             <tr>
               <th>#</th>
@@ -62,11 +62,16 @@
       </div>
     </div>
 
+    <ng-template #noResourcesForPlatform>
+      <p>No resources assigned to the platform</p>
+    </ng-template>
+
+
     <!-- equipmentsForPlatform table -->
     <div class="card mb-3">
       <div class="card-body">
         <h5 class="card-title">Platform Equipments</h5>
-        <table class="table">
+        <table class="table" *ngIf="equipmentsForPlatform.length !== 0 else noEquipmentsForPlatform">
           <thead>
             <tr>
               <th>#</th>
@@ -86,6 +91,10 @@
         </table>
       </div>
     </div>
+
+    <ng-template #noEquipmentsForPlatform>
+      <p>No equipments assigned to the platform</p>
+    </ng-template>
 
   </div>
 </div>
