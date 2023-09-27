@@ -23,7 +23,7 @@
         <tr *ngFor="let equipment of equipments; let i = index" (click)="navigateToEquipmentDetails(equipment.id)"class="rowTable">
           <th scope="row">{{ currentRowNumber + i }}</th>
           <td>{{ equipment.equipmentType }}</td>
-          <td>€ {{ equipment.equipmentCost }}</td>
+          <td>{{ euroCurrencyFormat(equipment.equipmentCost) }}</td>
           <td [ngClass]="getEquipmentStatusClass(equipment.equipmentStatus)">{{ equipment.equipmentStatus }}</td>
           <!-- to access 'platformName' property which may be null -->
           <td *ngIf="equipment.platform">{{ equipment.platform.platformName }}</td>
