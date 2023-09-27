@@ -20,10 +20,10 @@
               <p class="card-text mb-2"><small class="text-body-secondary"><strong>Location:</strong> {{ platform.location }}</small></p>
               <p class="card-text mb-2"><small class="text-body-secondary"><strong>Customer type:</strong> {{ platform.customerType }}</small></p>
               <hr>
-              <p class="card-text mb-2"><strong>Revenues per month:</strong> € {{ platform.revenuesPerMonth }}</p>
-              <p class="card-text mb-2"><strong>Costs per month:</strong> € {{ platform.totalCostsPerMonth }}</p>
+              <p class="card-text mb-2"><strong>Revenues per month:</strong> {{ euroCurrencyFormat(platform.revenuesPerMonth) }}</p>
+              <p class="card-text mb-2"><strong>Costs per month:</strong> {{ euroCurrencyFormat(platform.totalCostsPerMonth) }}</p>
               <p class="card-text mb-2" [ngClass]="{'text-success': platform.marginPerMonth > 0, 'text-danger': platform.marginPerMonth < 0}">
-                <strong>Margin per month:</strong> € {{ platform.marginPerMonth }}</p>
+                <strong>Margin per month:</strong> {{ euroCurrencyFormat(platform.marginPerMonth) }}</p>
               <hr>
               <a (click)="navigateToPlatformDetails(platform.id)" class="btn btn-secondary platformDetailsBtn">Platform details</a>
             </div>
