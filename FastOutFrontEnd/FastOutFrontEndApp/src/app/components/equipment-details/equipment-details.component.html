@@ -30,14 +30,14 @@
 
     <div class="card mb-3">
       <div class="card-body">
-        <button class="btn btn-danger removeBtn me-3" *ngIf="equipmentDetails.equipmentStatus === 'ASSIGNED'" (click)="removeEquipmentFromPlatform()">Remove platform</button>
+        <button class="btn btn-danger removeBtn me-3 mb-0" *ngIf="equipmentDetails.equipmentStatus === 'ASSIGNED'" (click)="removeEquipmentFromPlatform()">Remove platform</button>
 
-        <button class="btn btn-secondary changeStatusBtn me-3" *ngIf="equipmentDetails.equipmentStatus === 'AVAILABLE'" (click)="changeEquipmentStatus('NOTAVAILABLE')">Set NOTAVAILABLE</button>
-        <button class="btn btn-secondary changeStatusBtn me-3" *ngIf="equipmentDetails.equipmentStatus === 'NOTAVAILABLE'" (click)="changeEquipmentStatus('AVAILABLE')">Set AVAILABLE</button>
+        <button class="btn btn-secondary changeStatusBtn me-3 mb-3 mb-md-0" *ngIf="equipmentDetails.equipmentStatus === 'AVAILABLE'" (click)="changeEquipmentStatus('NOTAVAILABLE')">Set NOTAVAILABLE</button>
+        <button class="btn btn-secondary changeStatusBtn me-3 mb-3 mb-md-0" *ngIf="equipmentDetails.equipmentStatus === 'NOTAVAILABLE'" (click)="changeEquipmentStatus('AVAILABLE')">Set AVAILABLE</button>
 
-        <button class="btn btn-danger cancelBtn me-3" *ngIf="equipmentDetails.equipmentStatus === 'AVAILABLE' || equipmentDetails.equipmentStatus === 'NOTAVAILABLE'" (click)="deleteEquipment()">Delete equipment</button>
+        <button class="btn btn-danger cancelBtn me-3 mb-3 mb-md-0" *ngIf="equipmentDetails.equipmentStatus === 'AVAILABLE' || equipmentDetails.equipmentStatus === 'NOTAVAILABLE'" (click)="deleteEquipment()">Delete equipment</button>
 
-        <button type="button" class="btn btn-secondary cancelBtn me-3" (click)="navigateBack()">Close</button>
+        <button type="button" class="btn btn-secondary cancelBtn me-3 mb-0" (click)="navigateBack()">Close</button>
       </div>
     </div>
 
