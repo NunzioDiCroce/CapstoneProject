@@ -19,10 +19,10 @@
         </div>
 
         <hr>
-        <p class="card-text"><strong>Revenues per month:</strong> € {{ platformDetails.revenuesPerMonth }}</p>
-        <p class="card-text"><strong>Total costs per month:</strong> € {{ platformDetails.totalCostsPerMonth }}</p>
+        <p class="card-text"><strong>Revenues per month:</strong> {{ euroCurrencyFormat(platformDetails.revenuesPerMonth) }}</p>
+        <p class="card-text"><strong>Total costs per month:</strong> {{ euroCurrencyFormat(platformDetails.totalCostsPerMonth) }}</p>
         <p class="card-text" [ngClass]="{'text-success': platformDetails.marginPerMonth > 0, 'text-danger': platformDetails.marginPerMonth < 0}">
-          <strong>Margin per month:</strong> € {{ platformDetails.marginPerMonth }}</p>
+          <strong>Margin per month:</strong> {{ euroCurrencyFormat(platformDetails.marginPerMonth) }}</p>
         <hr>
         <p class="card-text"><strong>Total hours per month:</strong> {{ platformDetails.hoursPerMonth }}</p>
         <p class="card-text"><strong>Productivity:</strong> {{ platformDetails.productivity }} Parcels/Hour</p>
@@ -54,7 +54,7 @@
             <tr *ngFor="let resource of resourcesForPlatform; let i = index">
               <td>{{ resourcesRowNumber + i }}</td>
               <td>{{ resource.resourceType }}</td>
-              <td>€ {{ resource.resourceCost }}</td>
+              <td>{{ euroCurrencyFormat(resource.resourceCost) }}</td>
               <td>{{ resource.hoursPerMonth }}</td>
             </tr>
           </tbody>
@@ -84,7 +84,7 @@
             <tr *ngFor="let equipment of equipmentsForPlatform; let i = index">
               <td>{{ equipmentsRowNumber + i }}</td>
               <td>{{ equipment.equipmentType }}</td>
-              <td>€ {{ equipment.equipmentCost }}</td>
+              <td>{{ euroCurrencyFormat(equipment.equipmentCost) }}</td>
               <td>{{ equipment.serialNumber }}</td>
             </tr>
           </tbody>
