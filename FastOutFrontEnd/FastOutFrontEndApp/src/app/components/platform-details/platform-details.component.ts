@@ -88,14 +88,18 @@ export class PlatformDetailsComponent implements OnInit {
       return;
     }
     const platformId = this.platformDetails.id;
-    this.platformsSrv.deletePlatform(platformId).subscribe(
-      () => {
-        this.router.navigate(['/platforms']);
-      },
-      (error) => {
-        console.error('Error deleting platform:', error);
-      }
-    );
+    const confirmation = window.confirm('Are you sure you want to delete the platform?');
+    if (confirmation) {
+      this.platformsSrv.deletePlatform(platformId).subscribe(
+        () => {
+          alert('Platform deleted!');
+          this.router.navigate(['/platforms']);
+        },
+        (error) => {
+          console.error('Error deleting platform:', error);
+        }
+      );
+    }
   }
 
   navigateBack(): void {
