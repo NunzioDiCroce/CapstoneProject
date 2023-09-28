@@ -29,6 +29,7 @@ public class ResourceController {
 	@Autowired
 	private ResourceService resourceService;
 	
+	
 	// save Resource
 	@PostMapping
 	//@PreAuthorize("hasAuthority('AMMINISTRATORE')")
@@ -37,11 +38,7 @@ public class ResourceController {
 		return resourceService.saveResource(resource);
 	}
 	
-	
-	// find all Resources
-	// refers to 'find all Resources pagination'
-	
-	
+		
 	// find all Resources pagination
 	@GetMapping
 	public Page<Resource> getResources(@RequestParam(defaultValue = "0") int page,
@@ -73,11 +70,13 @@ public class ResourceController {
 		resourceService.deleteResource(id);
 	}
 	
+	
 	// * * * * * * * * * * assign Resource
 	@PutMapping("/{resourceId}/assign")
 	public Resource assignResource(@PathVariable UUID resourceId, @RequestBody AssignResourcePayload body) {
 		return resourceService.assignResourceSrv(resourceId, body);
 	}
+	
 	
 	// * * * * * * * * * * remove Resource
 	@PutMapping("/{resourceId}/remove")
