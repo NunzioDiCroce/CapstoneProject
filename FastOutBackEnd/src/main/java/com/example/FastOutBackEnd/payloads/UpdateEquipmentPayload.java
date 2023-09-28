@@ -19,10 +19,10 @@ import lombok.Setter;
 public class UpdateEquipmentPayload {
 	
 	//@Enumerated(EnumType.STRING)
-	//private EquipmentType equipmentType;
+	//private EquipmentType equipmentType; // commented to update only equipmentStatus
 	
-	//private BigDecimal equipmentCost;	
-	//private String serialNumber;
+	//private BigDecimal equipmentCost;	// commented to update only equipmentStatus
+	//private String serialNumber; // commented to update only equipmentStatus
 	
 	@Enumerated(EnumType.STRING)
 	private EquipmentStatus equipmentStatus;
