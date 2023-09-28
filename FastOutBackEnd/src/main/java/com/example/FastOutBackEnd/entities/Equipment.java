@@ -33,13 +33,13 @@ public class Equipment {
 	private UUID id;
 	
 	@Enumerated(EnumType.STRING)
-	private EquipmentType equipmentType; // input field
+	private EquipmentType equipmentType; // Input field
 	
 	private BigDecimal equipmentCost;
 	private String serialNumber; 
 	
 	@Enumerated(EnumType.STRING)
-	private EquipmentStatus equipmentStatus; // input field
+	private EquipmentStatus equipmentStatus; // Input field
 	
 	@ManyToOne
 	private Platform platform;
