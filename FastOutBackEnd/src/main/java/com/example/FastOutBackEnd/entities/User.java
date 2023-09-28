@@ -48,7 +48,7 @@ public class User implements UserDetails {
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
-		this.role = Role.USER; // to set 'USER' role by default
+		this.role = Role.USER; // To set 'USER' role by default
 	}
 	
 	@Override
