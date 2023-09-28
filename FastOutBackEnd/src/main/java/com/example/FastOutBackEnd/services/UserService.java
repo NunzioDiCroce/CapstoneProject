@@ -28,11 +28,9 @@ public class UserService {
 	
 	// create User
 	public User create(UserRequestPayload body) {
-		
 		userRepository.findByEmail(body.getEmail()).ifPresent(user -> {
 			throw new BadRequestException("The email has already been used.");
 		});
-		
 		User newUser = new User(body.getName(), body.getSurname(), body.getEmail(), body.getPassword());
 		return userRepository.save(newUser);
 	}
@@ -40,9 +38,7 @@ public class UserService {
 	
 	// find all Users pagination
 	public Page<User> find(int page, int size, String sort) {
-		
-		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-		
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));	
 		return userRepository.findAll(pageable);
 	}
 	
@@ -55,21 +51,17 @@ public class UserService {
 	
 	// update by id User
 	public User findByIdAndUpdate(UUID id, UserRequestPayload body) throws NotFoundException {
-		
 		User found = this.findById(id);
 		found.setEmail(body.getEmail());
 		found.setName(body.getName());
 		found.setSurname(body.getSurname());
-
 		return userRepository.save(found);
 	}
 	
 	
 	// delete by id User
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
-		
 		User found = this.findById(id);
-		
 		userRepository.delete(found);
 	}
 	
