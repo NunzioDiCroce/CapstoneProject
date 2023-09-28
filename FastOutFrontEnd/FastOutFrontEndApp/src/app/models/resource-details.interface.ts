@@ -1,6 +1,6 @@
 export interface ResourceDetails {
 
-  id: string;
+  id: string,
   resourceType: string,
   resourceCost: number,
   hoursPerMonth: number,
