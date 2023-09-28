@@ -30,6 +30,7 @@ public class PlatformController {
 	@Autowired
 	private PlatformService platformService;
 	
+	
 	// create Platform
 	@PostMapping
 	//@PreAuthorize("hasAuthority('AMMINISTRATORE')")
@@ -40,9 +41,7 @@ public class PlatformController {
 	
 	
 	// find all Platforms without pagination
-	// NOTE: this method is used only to loadAvailablePlatforms for
-	// assign/removeResourceToPlatform frontEnd functionality
-	// assign/removeEquipmentToPlatform frontEnd functionality
+	// NOTE: method used only to loadAvailablePlatforms for 'assign/remove Resource/Equipment ToPlatform' frontEnd functionalities
 	@GetMapping("/all")
 	public List<Platform> getAvailablePlatforms() {
 	    return platformService.getAllPlatforms();
@@ -95,6 +94,5 @@ public class PlatformController {
 		Platform platform = platformService.getPlatformByID(platformId);
 		return platform.getEquipments();
 	}
-
 
 }
