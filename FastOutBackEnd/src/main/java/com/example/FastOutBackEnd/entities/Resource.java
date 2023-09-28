@@ -33,13 +33,13 @@ public class Resource {
 	private UUID id;
 	
 	@Enumerated(EnumType.STRING)
-	private ResourceType resourceType; // input field
+	private ResourceType resourceType; // Input field
 	
 	private BigDecimal resourceCost;
 	private BigDecimal hoursPerMonth;
 	
 	@Enumerated(EnumType.STRING)
-	private ResourceStatus resourceStatus; // input field
+	private ResourceStatus resourceStatus; // Input field
 	
 	@ManyToOne
 	private Platform platform;
