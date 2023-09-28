@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate {
       alert('Login to access this resource!\nRegister if you have not an account.');
       return this.router.createUrlTree(['/login'])
     }))
-      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   }
 }
