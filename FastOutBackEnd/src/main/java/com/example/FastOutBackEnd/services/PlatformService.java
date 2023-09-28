@@ -77,34 +77,21 @@ public class PlatformService {
 		return platformRepository.findAll();
 	}
 	
+	
 	// find all Platforms pagination
 	public Page<Platform> find(int page, int size, String sort) {
 		Pageable pag = PageRequest.of(page, size, Sort.by(sort));
-		
 		return platformRepository.findAll(pag);
 	}
+	
 	
 	// get by id Platform
 	public Platform getPlatformByID(UUID id) {
 		Optional<Platform> found = platformRepository.findById(id);
-		
 		return found.orElseThrow(() -> new NotFoundException("Platform with " + id + "not found."));
 	}
 	
-	
-	// update by id Platform (see 'update by id Platform with business logic')
-//	public Platform updatePlatform(UUID id, UpdatePlatformPayload body) {
-//		Platform found = getPlatformByID(id);
-//		
-//		found.setLocation(body.getLocation());
-//		found.setCustomerType(body.getCustomerType());
-//		found.setParcelsPerMonth(body.getParcelsPerMonth());
-//		found.setParcelRate(body.getParcelRate());
-//
-//		return platformRepository.save(found);
-//	
-//	}
-	
+		
 	// * * * * * * * * * * update by id Platform with business logic
 	public Platform updatePlatform(UUID id, UpdatePlatformPayload body) {
 		Platform found = getPlatformByID(id);
