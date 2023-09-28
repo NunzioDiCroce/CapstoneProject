@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
   constructor( private authSrv:AuthService ) { }
 
   ngOnInit(): void {
-
     this.authSrv.user$.subscribe((_user) => {
       this.user = _user;
       console.log(this.user);
