@@ -27,7 +27,6 @@ import { EquipmentCreateComponent } from './components/equipment-create/equipmen
 import { FooterComponent } from './components/footer/footer.component';
 
 
-// definizione array delle rotte di tipo Route
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const routes: Route[] = [
   { path: '', component: HomeComponent },
@@ -79,8 +78,8 @@ const routes: Route[] = [
     BrowserModule,
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    RouterModule.forRoot(routes), // import RouterModule con metodo forRoot applicato alle rotte
-    HttpClientModule, // import HttpClientModule per gestione metodi http
+    RouterModule.forRoot(routes),
+    HttpClientModule,
     FormsModule
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
