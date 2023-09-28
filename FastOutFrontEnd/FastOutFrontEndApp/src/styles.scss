@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-// navbar
+// * * * * * * * * * * navbar
 .navbar {
   background-color: rgb(255, 230, 0) !important;
   //background-color: rgb(233, 255, 0) !important;
@@ -8,7 +8,8 @@
   margin-bottom: 0 !important;
 }
 
-// footer
+
+// * * * * * * * * * * footer
 .footer {
   height: 6vh;
   background-color: rgb(0, 0, 0);
@@ -19,7 +20,8 @@
   font-size: 0.6rem;
 }
 
-// home
+
+// * * * * * * * * * * home
 .homeTemplate {
   display: flex;
   flex-direction: column;
@@ -35,7 +37,8 @@
   padding: 10vw;
 }
 
-// buttons
+
+// * * * * * * * * * * buttons
 .homeBtn, .loginBtn, .registerBtn, .navBtn {
   width: 90px;
   background-color: rgb(0, 0, 0);
@@ -117,7 +120,8 @@
   //color: rgb(255, 230, 0);
 }
 
-// resources, equipments
+
+// * * * * * * * * * * resources, equipments
 .rowTable {
   cursor: pointer;
   transition: background-color 0.3s;
@@ -136,7 +140,8 @@
   color: black;
 }
 
-// platform details/create, resource details/create, equipment details/create
+
+// * * * * * * * * * * platform details/create, resource details/create, equipment details/create
 .labelNoWrap {
   white-space: nowrap;
 }
@@ -145,7 +150,8 @@
   cursor: pointer;
 }
 
-// platform
+
+// * * * * * * * * * * platform
 .marginSuccess {
   color: green;
 }
