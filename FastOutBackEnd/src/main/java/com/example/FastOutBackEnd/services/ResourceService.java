@@ -29,41 +29,44 @@ public class ResourceService {
 	@Autowired
 	private PlatformService platformService;
 	
+	
 	// save Resource
 	public Resource saveResource(Resource resource) {
 		return resourceRepository.save(resource);
 	}
+	
 	
 	// find all Resources
 	public List<Resource> getAllResources() {
 		return resourceRepository.findAll();
 	}
 	
+	
 	// find all Resources pagination
 	public Page<Resource> find(int page, int size, String sort) {
 		Pageable pag = PageRequest.of(page, size, Sort.by(sort));
-		
 		return resourceRepository.findAll(pag);
 	}
+	
 	
 	// get by id Resource
 	public Resource getResourceByID(UUID id) {
 		Optional<Resource> found = resourceRepository.findById(id);
-		
 		return found.orElseThrow(() -> new NotFoundException("Resource with " + id + "not found."));
 	}
+	
 	
 	// update by id Resource
 	public Resource updateResource(UUID id, UpdateResourcePayload body) {
 		Resource found = getResourceByID(id);
 			
-		//found.setResourceType(body.getResourceType()); // commented to update only resourceStatus
-		//found.setResourceCost(body.getResourceCost()); // commented to update only resourceStatus
+//		found.setResourceType(body.getResourceType()); // commented to update only resourceStatus
+//		found.setResourceCost(body.getResourceCost()); // commented to update only resourceStatus
 		found.setResourceStatus(body.getResourceStatus());
 
 		return resourceRepository.save(found);
-	
 	}
+	
 	
 	// delete by id Resource
 	public void deleteResource(UUID id) {
