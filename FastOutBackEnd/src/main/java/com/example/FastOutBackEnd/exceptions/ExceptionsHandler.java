@@ -21,7 +21,6 @@ public class ExceptionsHandler {
 	public ErrorsPayloadWithList handleValidationErrors(MethodArgumentNotValidException e) {
 		List<String> errors = e.getBindingResult().getFieldErrors().stream().map(error -> error.getDefaultMessage())
 				.toList();
-
 		return new ErrorsPayloadWithList("There are errors in the payload.", new Date(), errors);
 	}
 
