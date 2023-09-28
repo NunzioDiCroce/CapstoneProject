@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // metodo di registrazione GESTIONE ERRORI SI
   register(form:NgForm) {
     this.isLoading = true;
     console.log(form.value);
@@ -34,14 +33,25 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/login'])
         },
         (error) => {
+          // to get backend errors
           console.error(error.error);
-          if(error.error === 'Email format is invalid') {
-            alert('Email format is invalid!')
-          } else if(error.error === 'Email already exists') {
-            alert('Email already exists!')
-          } else if(error.error === 'Password is too short') {
-            alert('Password must be at least 4 characters!')
+          let errorMessage = 'An error occurred during registration.';
+          console.log(error.error);
+          if (error.error && error.error.errorsList && error.error.errorsList.length > 0) {
+            errorMessage = 'Registration failed. Errors:';
+            error.error.errorsList.forEach((errorMsg: string) => {
+              errorMessage += `\n- ${errorMsg}`;
+            });
+          } else if (error.error && error.error.message === 'The email has already been used.') {
+            errorMessage = 'Email has already been used.';
+          } else if (error.error === 'Email format is invalid') {
+            errorMessage = 'Email format is invalid!';
+          } else if (error.error === 'Password is too short') {
+            errorMessage = 'Password must be at least 4 characters!';
+          } else if (error.error === 'Email already exists') {
+            errorMessage = 'Email already exists!';
           }
+          alert(errorMessage);
           this.isLoading = false
         }
       );
