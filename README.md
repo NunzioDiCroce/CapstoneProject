@@ -11,16 +11,14 @@ FastOut is a smart web application designed for logistics management. It helps b
 - Real-time monitoring of platform economics
 - Real-time monitoring of operational KPIs
 
-## Getting Started
-
-## Prerequisites
+## Getting Started: Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 - Angular CLI version 14.2.11
 - Spring Boot v3.1.3
 - PostgreSQL
 
-## Usage
+## Getting Started: Usage
 
 1. Start the frontend by running `ng serve -o`
 2. Start the backend
