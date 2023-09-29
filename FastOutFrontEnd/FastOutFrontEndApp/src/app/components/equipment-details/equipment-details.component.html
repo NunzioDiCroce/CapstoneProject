@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row" *ngIf="equipmentDetails">
+    <h4 class="mb-3 mt-3">{{ equipmentDetails.equipmentType }}</h4>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text"><strong>Monthly cost:</strong> {{ euroCurrencyFormat(equipmentDetails.equipmentCost) }}</p>
+        <p class="card-text"><strong>Serial number:</strong> {{ equipmentDetails.serialNumber }}</p>
+        <p class="card-text"><strong>Equipment status:</strong><span [ngClass]="getEquipmentStatusClass(equipmentDetails.equipmentStatus)"> {{ equipmentDetails.equipmentStatus }}</span></p>
+        <p class="card-text"><!-- to access 'platformName' property which may be null -->
+          <strong>Platform:</strong> {{ equipmentDetails.platform ? equipmentDetails.platform.platformName : '' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="card mb-3" *ngIf="equipmentDetails.equipmentStatus === 'AVAILABLE' && dataLoaded">
+      <div class="card-body">
+
+        <div class="form-group d-flex align-items-center">
+          <label for="platformSelect" class="me-3 labelNoWrap">Select a platform:</label>
+          <select id="platformSelect" class="form-control me-3 pointerOnSelect" [(ngModel)]="selectedPlatformId">
+            <option *ngFor="let platform of availablePlatforms" [value]="platform.id">{{ platform.platformName }}</option>
+          </select>
+          <button class="btn btn-light assignBtn" (click)="assignEquipmentToPlatform()"
+          [disabled]="!selectedPlatformId">Assign</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <button class="btn btn-danger removeBtn me-3 mb-0" *ngIf="equipmentDetails.equipmentStatus === 'ASSIGNED'" (click)="removeEquipmentFromPlatform()">Remove platform</button>
+
+        <button class="btn btn-secondary changeStatusBtn me-3 mb-3 mb-md-0" *ngIf="equipmentDetails.equipmentStatus === 'AVAILABLE'" (click)="changeEquipmentStatus('NOTAVAILABLE')">Set NOTAVAILABLE</button>
+        <button class="btn btn-secondary changeStatusBtn me-3 mb-3 mb-md-0" *ngIf="equipmentDetails.equipmentStatus === 'NOTAVAILABLE'" (click)="changeEquipmentStatus('AVAILABLE')">Set AVAILABLE</button>
+
+        <button class="btn btn-danger cancelBtn me-3 mb-3 mb-md-0" *ngIf="equipmentDetails.equipmentStatus === 'AVAILABLE' || equipmentDetails.equipmentStatus === 'NOTAVAILABLE'" (click)="deleteEquipment()">Delete equipment</button>
+
+        <button type="button" class="btn btn-secondary cancelBtn me-3 mb-0" (click)="navigateBack()">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

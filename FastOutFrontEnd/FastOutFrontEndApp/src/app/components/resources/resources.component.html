@@ -1,0 +1,50 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="mb-3 mt-3">Resources</h4>
+    </div>
+    <div class="col-sm-4 d-flex justify-content-end align-items-center">
+      <button class="btn btn-success createBtn" (click)="createResource()">Create resource</button>
+    </div>
+
+    <table class="table caption-top">
+      <!--<caption>Table caption</caption>-->
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Type</th>
+          <th scope="col">Monthly cost</th>
+          <th scope="col">Status</th>
+          <th scope="col">Platform</th>
+        </tr>
+      </thead>
+      <tbody class="col-12">
+        <tr *ngFor="let resource of resources; let i = index" (click)="navigateToResourceDetails(resource.id)"class="rowTable">
+          <th scope="row">{{ currentRowNumber + i }}</th>
+          <td>{{ resource.resourceType }}</td>
+          <td>{{ euroCurrencyFormat(resource.resourceCost) }}</td>
+          <td [ngClass]="getResourceStatusClass(resource.resourceStatus)">{{ resource.resourceStatus }}</td>            <!-- to access 'platformName' property which may be null -->
+          <td *ngIf="resource.platform">{{ resource.platform.platformName }}</td>
+          <td *ngIf="!resource.platform"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link paginationBtn" (click)="prevPage()">Previous</a></li>
+
+      <li class="page-item" *ngFor="let page of totalPagesArray">
+        <a class="page-link pageBtn" (click)="goToPage(page)"
+        [ngClass]="{ 'active': page === currentPageIndex }">{{ page + 1 }}</a></li>
+
+      <li class="page-item">
+        <a class="page-link paginationBtn" (click)="nextPage()">Next</a></li>
+    </ul>
+  </nav>
+
+</div>

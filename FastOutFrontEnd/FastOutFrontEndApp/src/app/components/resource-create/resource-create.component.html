@@ -1,0 +1,43 @@
+<div class="container">
+  <h4 class="mb-3 mt-3">Create resource</h4>
+  <div class="row">
+    <div class="col-6">
+
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-group mb-3">
+          <label for="resourceType">Resource type</label>
+          <select class="form-control pointerOnSelect" id="resourceType" [(ngModel)]="resource.resourceType" (ngModelChange)="onResourceTypeChange()" name="resourceType" required>
+            <option value="SITEMANAGER">SITEMANAGER</option>
+            <option value="FORKLIFTDRIVER">FORKLIFTDRIVER</option>
+            <option value="PICKER">PICKER</option>
+            <option value="CONTROLLER">CONTROLLER</option>
+            <option value="OPERATOR">OPERATOR</option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="resourceCost">Resource monthly cost</label>
+          <input type="number" step="0.01" class="form-control" id="resourceCost" [(ngModel)]="resource.resourceCost" name="resourceCost" required [disabled]="true">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="hoursPerMonth">Hours per month</label>
+          <input type="number" class="form-control" id="hoursPerMonth" [(ngModel)]="resource.hoursPerMonth" name="hoursPerMonth" required [disabled]="true">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="resourceStatus">Resource status</label>
+          <select class="form-control pointerOnSelect" id="resourceStatus" [(ngModel)]="resource.resourceStatus" name="resourceStatus" required>
+            <option value="AVAILABLE">AVAILABLE</option>
+            <option value="NOTAVAILABLE">NOT AVAILABLE</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-success createBtn me-3" [disabled]="form.invalid">Create resource</button>
+        <button type="button" class="btn btn-danger cancelBtn" (click)="cancelCreation()">Cancel</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,54 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="mb-3 mt-3">Platforms</h4>
+    </div>
+    <div class="col-sm-4 d-flex justify-content-end align-items-center">
+      <button class="btn btn-success createBtn" (click)="createPlatform()">Create platform</button>
+    </div>
+
+    <div class="col-12" *ngFor="let platform of platforms">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img [src]=" './assets/images/' + platform.customerType + '.jpg' " class="img-fluid rounded w-100 h-100" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ platform.platformName }}</h5>
+              <p class="card-text mb-2"><small class="text-body-secondary"><strong>Location:</strong> {{ platform.location }}</small></p>
+              <p class="card-text mb-2"><small class="text-body-secondary"><strong>Customer type:</strong> {{ platform.customerType }}</small></p>
+              <hr>
+              <p class="card-text mb-2"><strong>Revenues per month:</strong> {{ euroCurrencyFormat(platform.revenuesPerMonth) }}</p>
+              <p class="card-text mb-2"><strong>Costs per month:</strong> {{ euroCurrencyFormat(platform.totalCostsPerMonth) }}</p>
+              <p class="card-text mb-2" [ngClass]="{'text-success': platform.marginPerMonth > 0, 'text-danger': platform.marginPerMonth < 0}">
+                <strong>Margin per month:</strong> {{ euroCurrencyFormat(platform.marginPerMonth) }}</p>
+              <hr>
+              <a (click)="navigateToPlatformDetails(platform.id)" class="btn btn-secondary platformDetailsBtn">Platform details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link paginationBtn" (click)="prevPage()">Previous</a>
+      </li>
+
+      <li class="page-item" *ngFor="let page of totalPagesArray">
+        <a class="page-link pageBtn" (click)="goToPage(page)"
+        [ngClass]="{ 'active': page === currentPageIndex }">{{ page + 1 }}</a>
+      </li>
+
+      <li class="page-item">
+        <a class="page-link paginationBtn" (click)="nextPage()">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>

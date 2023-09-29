@@ -29,6 +29,7 @@ public class EquipmentController {
 	@Autowired
 	private EquipmentService equipmentService;
 	
+	
 	// save Equipment
 	@PostMapping
 	//@PreAuthorize("hasAuthority('AMMINISTRATORE')")
@@ -36,10 +37,6 @@ public class EquipmentController {
 	public Equipment createEquipment(@RequestBody Equipment equipment) {
 		return equipmentService.saveEquipment(equipment);
 	}
-	
-	
-	// find all Equipments
-	// refers to 'find all Equipments pagination'
 	
 	
 	// find all Equipments pagination
@@ -73,11 +70,13 @@ public class EquipmentController {
 		equipmentService.deleteEquipment(id);
 	}
 	
+	
 	// * * * * * * * * * * assign Equipment
 	@PutMapping("/{equipmentId}/assign")
 	public Equipment assignEquipment(@PathVariable UUID equipmentId, @RequestBody AssignEquipmentPayload body) {
 		return equipmentService.assignEquipmentSrv(equipmentId, body);
 	}
+	
 	
 	// * * * * * * * * * * remove Equipment
 	@PutMapping("/{equipmentId}/remove")

@@ -17,10 +17,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdatePlatformPayload {
 	
-	private String location;
+	//private String platformName; // commented to update only parcelsPerMonth and parcelRate
+	//private String location; // commented to update only parcelsPerMonth and parcelRate
 	
-	@Enumerated(EnumType.STRING)
-	private CustomerType customerType;
+	//@Enumerated(EnumType.STRING) // commented to update only parcelsPerMonth and parcelRate
+	//private CustomerType customerType; // commented to update only parcelsPerMonth and parcelRate
 	
 	private BigDecimal parcelsPerMonth;
 	private BigDecimal parcelRate;

@@ -28,48 +28,52 @@ public class EquipmentService {
 	@Autowired
 	private PlatformService platformService;
 	
+	
 	// save Equipment
 	public Equipment saveEquipment(Equipment equipment) {
 		return equipmentRepository.save(equipment);
 	}
+	
 	
 	// find all Equipments
 	public List<Equipment> getAllEquipments() {
 		return equipmentRepository.findAll();
 	}
 	
+	
 	// find all Equipments pagination
 	public Page<Equipment> find(int page, int size, String sort) {
 		Pageable pag = PageRequest.of(page, size, Sort.by(sort));
-		
 		return equipmentRepository.findAll(pag);
 	}
+	
 	
 	// get by id Equipment
 	public Equipment getEquipmentByID(UUID id) {
 		Optional<Equipment> found = equipmentRepository.findById(id);
-		
 		return found.orElseThrow(() -> new NotFoundException("Equipment with " + id + "not found."));
 	}
+	
 	
 	// update by id Equipment
 	public Equipment updateEquipment(UUID id, UpdateEquipmentPayload body) {
 		Equipment found = getEquipmentByID(id);
 					
-		found.setEquipmentType(body.getEquipmentType());
-		found.setEquipmentCost(body.getEquipmentCost());
-		found.setSerialNumber(body.getSerialNumber());
+//		found.setEquipmentType(body.getEquipmentType()); // commented to update only resourceStatus
+//		found.setEquipmentCost(body.getEquipmentCost()); // commented to update only resourceStatus
+//		found.setSerialNumber(body.getSerialNumber()); // commented to update only resourceStatus
 		found.setEquipmentStatus(body.getEquipmentStatus());
 
 		return equipmentRepository.save(found);
-	
 	}
+	
 	
 	// delete by id Equipment
 	public void deleteEquipment(UUID id) {
 		Equipment found = getEquipmentByID(id);
 		equipmentRepository.delete(found);
 	}
+	
 	
 	// * * * * * * * * * * assign Equipment
 	public Equipment assignEquipmentSrv(UUID equipmentId, AssignEquipmentPayload body)
@@ -99,8 +103,8 @@ public class EquipmentService {
         platformService.savePlatform(platform);
 
 		return equipmentRepository.save(equipment);
-
 	}
+	
 	
 	// * * * * * * * * * * remove Equipment
 	public Equipment removeEquipmentSrv(UUID equipmentId, RemoveEquipmentPayload body)
@@ -127,7 +131,6 @@ public class EquipmentService {
         platform.updateMarginPerMonth();
 
 		return equipmentRepository.save(equipment);
-
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.UUID;
 import com.example.FastOutBackEnd.enums.CustomerType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -34,13 +35,16 @@ public class Platform {
 	@GeneratedValue
 	private UUID id;
 	
-	private String location; // input field
+	@Column(nullable = false, unique = true)
+	private String platformName;
+	
+	private String location; // Input field
 	
 	@Enumerated(EnumType.STRING)
-	private CustomerType customerType; // input field
+	private CustomerType customerType; // Input field
 	
-	private BigDecimal parcelsPerMonth; // input field
-	private BigDecimal parcelRate; // input field
+	private BigDecimal parcelsPerMonth; // Input field
+	private BigDecimal parcelRate; // Input field
 	private BigDecimal revenuesPerMonth;
 	
 	private BigDecimal totalCostsPerMonth;
@@ -73,6 +77,7 @@ public class Platform {
 		}
 	}
 	
+	
 	// * * * * * * * * * * Platform productivity updating
 	public void updateProductivity() {
 	    if (hoursPerMonth != null && hoursPerMonth.compareTo(BigDecimal.ZERO) > 0) {
@@ -82,10 +87,10 @@ public class Platform {
 	    }
 	}
 	
+	
 	// * * * * * * * * * * Platform totalCostsPerMonth updating
 	public void updateTotalCostsPerMonth() {
 		BigDecimal totalCosts = BigDecimal.ZERO;
-		
 		if (resources != null) {
 			for (Resource resource : resources) {
 				if (resource.getResourceCost() != null) {
@@ -93,7 +98,6 @@ public class Platform {
 				}
 			}
 		}
-		
 		if (equipments != null) {
 			for (Equipment equipment : equipments) {
 				if(equipment.getEquipmentCost() != null) {
@@ -101,9 +105,9 @@ public class Platform {
 				}
 			}
 		}
-		
 		this.totalCostsPerMonth = totalCosts;
 	}
+	
 	
 	// * * * * * * * * * * Platform marginPerMonth updating
 	public void updateMarginPerMonth() {

@@ -18,10 +18,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateResourcePayload {
 	
-	@Enumerated(EnumType.STRING)
-	private ResourceType resourceType;
+	//@Enumerated(EnumType.STRING)
+	//private ResourceType resourceType; // commented to update only resourceStatus
 	
-	private BigDecimal resourceCost;
+	//private BigDecimal resourceCost; // commented to update only resourceStatus
 	
 	@Enumerated(EnumType.STRING)
 	private ResourceStatus resourceStatus;

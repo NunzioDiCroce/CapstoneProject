@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="row" *ngIf="platformDetails">
+    <h4 class="mb-3 mt-3"><strong>{{ platformDetails.platformName }}</strong></h4>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text"><strong>Location:</strong> {{ platformDetails.location }}</p>
+        <p class="card-text"><strong>Customer type:</strong> {{ platformDetails.customerType }}</p>
+
+        <!-- Form-group with [(ngModel)]="updatedParcelsPerMonth" to implement the correct binding between the model input fields and the component variables (the changes are reflected in the component variables). -->
+        <div class="form-group">
+          <label for="parcelsPerMonth"><strong>Parcels per month:</strong></label>
+          <input type="number" step="0.01" class="form-control" id="parcelsPerMonth" [(ngModel)]="updatedParcelsPerMonth" name="parcelsPerMonth" style="width: 25%;">
+        </div>
+
+        <!-- Form-group with [(ngModel)]="updatedParcelRate" to implement the correct binding between the model input fields and the component variables (the changes are reflected in the component variables). -->
+        <div class="form-group">
+          <label for="parcelRate"><strong>Parcel rate:</strong></label>
+          <input type="number" step="0.01" class="form-control" id="parcelRate" [(ngModel)]="updatedParcelRate" name="parcelRate" style="width: 25%;">
+        </div>
+
+        <hr>
+        <p class="card-text"><strong>Revenues per month:</strong> {{ euroCurrencyFormat(platformDetails.revenuesPerMonth) }}</p>
+        <p class="card-text"><strong>Total costs per month:</strong> {{ euroCurrencyFormat(platformDetails.totalCostsPerMonth) }}</p>
+        <p class="card-text" [ngClass]="{'text-success': platformDetails.marginPerMonth > 0, 'text-danger': platformDetails.marginPerMonth < 0}">
+          <strong>Margin per month:</strong> {{ euroCurrencyFormat(platformDetails.marginPerMonth) }}</p>
+        <hr>
+        <p class="card-text"><strong>Total hours per month:</strong> {{ platformDetails.hoursPerMonth }}</p>
+        <p class="card-text"><strong>Productivity:</strong> {{ platformDetails.productivity }} Parcels/Hour</p>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body d-flex flex-wrap">
+        <button class="btn btn-primary updateDetailsBtn me-3 mb-3 mb-md-0" (click)="updatePlatformDetails()">Save changes</button>
+        <button class="btn btn-danger cancelBtn me-3 mb-3 mb-md-0" (click)="deletePlatform()">Delete platform</button>
+        <button type="button" class="btn btn-secondary cancelBtn me-3 mb-0" (click)="navigateBack()">Close</button>
+      </div>
+    </div>
+
+    <!-- resourcesForPlatform table -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Platform Resources</h5>
+        <table class="table" *ngIf="resourcesForPlatform.length !== 0 else noResourcesForPlatform">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Type</th>
+              <th>Monthly cost</th>
+              <th>Hours per month</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let resource of resourcesForPlatform; let i = index">
+              <td>{{ resourcesRowNumber + i }}</td>
+              <td>{{ resource.resourceType }}</td>
+              <td>{{ euroCurrencyFormat(resource.resourceCost) }}</td>
+              <td>{{ resource.hoursPerMonth }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <ng-template #noResourcesForPlatform>
+      <p>No resources assigned to the platform</p>
+    </ng-template>
+
+
+    <!-- equipmentsForPlatform table -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Platform Equipments</h5>
+        <table class="table" *ngIf="equipmentsForPlatform.length !== 0 else noEquipmentsForPlatform">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Type</th>
+              <th>Monthly cost</th>
+              <th>Serial number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let equipment of equipmentsForPlatform; let i = index">
+              <td>{{ equipmentsRowNumber + i }}</td>
+              <td>{{ equipment.equipmentType }}</td>
+              <td>{{ euroCurrencyFormat(equipment.equipmentCost) }}</td>
+              <td>{{ equipment.serialNumber }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <ng-template #noEquipmentsForPlatform>
+      <p>No equipments assigned to the platform</p>
+    </ng-template>
+
+  </div>
+</div>
+
+
+
+
+

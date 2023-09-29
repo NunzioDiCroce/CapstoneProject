@@ -1,5 +1,6 @@
 package com.example.FastOutBackEnd.controllers;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.FastOutBackEnd.entities.Equipment;
 import com.example.FastOutBackEnd.entities.Platform;
+import com.example.FastOutBackEnd.entities.Resource;
 import com.example.FastOutBackEnd.payloads.UpdatePlatformPayload;
 import com.example.FastOutBackEnd.services.PlatformService;
 
@@ -27,6 +30,7 @@ public class PlatformController {
 	@Autowired
 	private PlatformService platformService;
 	
+	
 	// create Platform
 	@PostMapping
 	//@PreAuthorize("hasAuthority('AMMINISTRATORE')")
@@ -36,9 +40,13 @@ public class PlatformController {
 	}
 	
 	
-	// find all Platforms
-	// refers to 'find all Platforms pagination'
-	
+	// find all Platforms without pagination
+	// NOTE: method used only to loadAvailablePlatforms for 'assign/remove Resource/Equipment ToPlatform' frontEnd functionalities
+	@GetMapping("/all")
+	public List<Platform> getAvailablePlatforms() {
+	    return platformService.getAllPlatforms();
+	}
+
 	
 	// find all Platforms pagination
 	@GetMapping
@@ -69,6 +77,22 @@ public class PlatformController {
 	//@PreAuthorize("hasAuthority('AMMINISTRATORE')")
 	public void deletePlatform(@PathVariable UUID id) {
 		platformService.deletePlatform(id);
+	}
+	
+	
+	// get resources associated with the platform
+	@GetMapping("/{platformId}/resources")
+	public List<Resource> getResourcesForPlatform(@PathVariable UUID platformId) {    
+	    Platform platform = platformService.getPlatformByID(platformId);
+	    return platform.getResources();
+	}
+	
+	
+	// get equipments associated with the platform
+	@GetMapping("/{platformId}/equipments")
+	public List<Equipment> getEquipmentsForPlatform(@PathVariable UUID platformId) {
+		Platform platform = platformService.getPlatformByID(platformId);
+		return platform.getEquipments();
 	}
 
 }

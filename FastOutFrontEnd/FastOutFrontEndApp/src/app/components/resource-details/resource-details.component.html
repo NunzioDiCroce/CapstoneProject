@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row" *ngIf="resourceDetails">
+    <h4 class="mb-3 mt-3">{{ resourceDetails.resourceType }}</h4>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text"><strong>Monthly cost:</strong> {{ euroCurrencyFormat(resourceDetails.resourceCost) }}</p>
+        <p class="card-text"><strong>Hours per month:</strong> {{ resourceDetails.hoursPerMonth }}</p>
+        <p class="card-text"><strong>Resource status:</strong><span [ngClass]="getResourceStatusClass(resourceDetails.resourceStatus)"> {{ resourceDetails.resourceStatus }}</span></p>
+        <p class="card-text"><!-- to access 'platformName' property which may be null -->
+          <strong>Platform:</strong> {{ resourceDetails.platform ? resourceDetails.platform.platformName : '' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="card mb-3" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE' && dataLoaded">
+      <div class="card-body">
+
+        <div class="form-group d-flex align-items-center">
+          <label for="platformSelect" class="me-3 labelNoWrap">Select a platform:</label>
+          <select id="platformSelect" class="form-control me-3 pointerOnSelect" [(ngModel)]="selectedPlatformId">
+            <option *ngFor="let platform of availablePlatforms" [value]="platform.id">{{ platform.platformName }}</option>
+          </select>
+          <button class="btn btn-light assignBtn" (click)="assignResourceToPlatform()"
+          [disabled]="!selectedPlatformId">Assign</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <button class="btn btn-danger removeBtn me-3 mb-0" *ngIf="resourceDetails.resourceStatus === 'ASSIGNED'" (click)="removeResourceFromPlatform()">Remove platform</button>
+
+        <button class="btn btn-secondary changeStatusBtn me-3 mb-3 mb-md-0" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE'" (click)="changeResourceStatus('NOTAVAILABLE')">Set NOTAVAILABLE</button>
+        <button class="btn btn-secondary changeStatusBtn me-3 mb-3 mb-md-0" *ngIf="resourceDetails.resourceStatus === 'NOTAVAILABLE'" (click)="changeResourceStatus('AVAILABLE')">Set AVAILABLE</button>
+
+        <button class="btn btn-danger cancelBtn me-3 mb-3 mb-md-0" *ngIf="resourceDetails.resourceStatus === 'AVAILABLE' || resourceDetails.resourceStatus === 'NOTAVAILABLE'" (click)="deleteResource()">Delete resource</button>
+
+        <button type="button" class="btn btn-secondary cancelBtn me-3 mb-0" (click)="navigateBack()">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

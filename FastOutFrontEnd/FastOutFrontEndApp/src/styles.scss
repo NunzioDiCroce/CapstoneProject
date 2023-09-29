@@ -1,0 +1,160 @@
+/* You can add global styles to this file, and also import other style files */
+
+// * * * * * * * * * * navbar
+.navbar {
+  background-color: rgb(255, 230, 0) !important;
+  //background-color: rgb(233, 255, 0) !important;
+  color: rgb(0, 0, 0) !important;
+  margin-bottom: 0 !important;
+}
+
+
+// * * * * * * * * * * footer
+.footer {
+  height: 6vh;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 230, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+}
+
+
+// * * * * * * * * * * home
+.homeTemplate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  //background-image: url('./assets/images/homeBackground.jpg');
+  //background-size: cover;
+  //background-position: center;
+  //background-repeat: no-repeat;
+  height: 86vh;
+  width: 100vw;
+  //margin: 0;
+  padding: 10vw;
+}
+
+
+// * * * * * * * * * * buttons
+.homeBtn, .loginBtn, .registerBtn, .navBtn {
+  width: 90px;
+  background-color: rgb(0, 0, 0);
+  border-color:rgb(0, 0, 0);
+  color: rgb(255, 230, 0);
+  transition: background-color 0.3s, color 0.3s;
+}
+.homeBtn:hover, .loginBtn:hover, .registerBtn:hover {
+  background-color: rgb(255, 230, 0);
+  border-color:rgb(255, 230, 0);
+  color: rgb(0, 0, 0);
+}
+.navBtn:hover {
+  background-color: rgb(255, 230, 0);
+  border-color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+}
+
+.paginationBtn {
+  width: 90px;
+  background-color: rgb(0, 0, 0);
+  border-color:rgb(0, 0, 0);
+  color: rgb(255, 230, 0);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.paginationBtn:hover {
+  background-color: rgb(255, 230, 0);
+  border-color:rgb(255, 230, 0);
+  color: rgb(0, 0, 0);
+}
+
+.pageBtn {
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+.pageBtn:hover {
+  color: rgb(0, 0, 0);
+}
+.pageBtn.active {
+  background-color: rgb(255, 230, 0);
+  border-color:rgb(255, 230, 0);
+  color: black;
+}
+
+.createBtn {
+  width: 180px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.createBtn:hover {
+  background-color: rgb(255, 230, 0);
+  border-color:rgb(255, 230, 0);
+  color: rgb(0, 0, 0);
+}
+
+.cancelBtn {
+  width: 180px;
+}
+
+.assignBtn, .removeBtn, .changeStatusBtn, .platformDetailsBtn, .updateDetailsBtn{
+  width: 180px;
+  background-color: rgb(0, 0, 0);
+  //background-color: rgb(255, 230, 0);
+  border-color:rgb(0, 0, 0);
+  //border-color:rgb(255, 230, 0);
+  color: rgb(255, 230, 0);
+  //color: rgb(0, 0, 0);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.assignBtn:hover, .removeBtn:hover, .changeStatusBtn:hover, .platformDetailsBtn:hover, .updateDetailsBtn:hover {
+  background-color: rgb(255, 230, 0);
+  //background-color: rgb(0, 0, 0);
+  border-color:rgb(255, 230, 0);
+  //border-color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  //color: rgb(255, 230, 0);
+}
+
+
+// * * * * * * * * * * resources, equipments
+.rowTable {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.rowTable:hover {
+  background-color: rgb(255, 230, 0);
+}
+
+.available {
+  color: green;
+}
+.notAvailable {
+  color: red;
+}
+.assigned {
+  color: black;
+}
+
+
+// * * * * * * * * * * platform details/create, resource details/create, equipment details/create
+.labelNoWrap {
+  white-space: nowrap;
+}
+
+.pointerOnSelect {
+  cursor: pointer;
+}
+
+
+// * * * * * * * * * * platform
+.marginSuccess {
+  color: green;
+}
+.marginDanger {
+  color: red;
+}

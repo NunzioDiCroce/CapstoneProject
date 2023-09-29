@@ -1,0 +1,46 @@
+<div class="container">
+  <h4 class="mb-3 mt-3">Create platform</h4>
+  <div class="row">
+    <div class="col-6">
+
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-group mb-3">
+          <label for="platformName">Platform name</label>
+          <input type="text" class="form-control" id="platformName" [(ngModel)]="platform.platformName" name="platformName" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="location">Platform location</label>
+          <input type="text" class="form-control" id="location" [(ngModel)]="platform.location" name="location" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="customerType">Customer type</label>
+          <select class="form-control pointerOnSelect" id="customerType" [(ngModel)]="platform.customerType" name="customerType" required>
+            <option value="AUTOMOTIVE">AUTOMOTIVE</option>
+            <option value="CONSUMER">CONSUMER</option>
+            <option value="ECOMMERCE">ECOMMERCE</option>
+            <option value="FASHION">FASHION</option>
+            <option value="FOOD">FOOD</option>
+            <option value="FORWARDER">FORWARDER</option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="parcelsPerMonth">Parcels per month</label>
+          <input type="number" class="form-control" id="parcelsPerMonth" [(ngModel)]="platform.parcelsPerMonth" name="parcelsPerMonth" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="parcelRate">Parcel rate</label>
+          <input type="number" step="0.01" class="form-control" id="parcelRate" [(ngModel)]="platform.parcelRate" name="parcelRate" required>
+        </div>
+
+        <button type="submit" class="btn btn-success createBtn me-3" [disabled]="form.invalid">Create platform</button>
+        <button type="button" class="btn btn-danger cancelBtn" (click)="cancelCreation()">Cancel</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
