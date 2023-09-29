@@ -1,4 +1,4 @@
-# FastOut
+# FastOut :rocket:
 
 FastOut is a smart web application designed for logistics management. It helps businesses optimize their assets and monitor key performance indicators (KPIs) in real time. The application is developed using Angular for the frontend, Spring Boot for the backend, and PostgreSQL for data storage.
 
